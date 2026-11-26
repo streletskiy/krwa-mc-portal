@@ -1,0 +1,115 @@
+{
+	"admin": {
+		"tasks": {
+			"title": "Фоновые задачи",
+			"description": "Ход выполнения задач сервера, повторный запуск и очистка истории.",
+			"loadErrorTitle": "Не удалось загрузить фоновые задачи",
+			"emptyTitle": "Задач пока нет",
+			"emptyDescription": "Фоновые задачи ещё не запускались.",
+			"filteredEmptyTitle": "Задачи не найдены",
+			"filteredEmptyDescription": "Измените фильтр статуса.",
+			"retry": "Повторить",
+			"retryQueued": "Задача поставлена в очередь повторно",
+			"filters": {
+				"allStatuses": "Все статусы"
+			},
+			"source": {
+				"system": "Система",
+				"userId": "Пользователь #{{id}}"
+			},
+			"table": {
+				"task": "Задача",
+				"progress": "Прогресс",
+				"source": "Источник",
+				"updated": "Время",
+				"detail": "Подробности состояния"
+			},
+			"cleanup": {
+				"action": "Очистить историю",
+				"title": "Удалить завершённые задачи",
+				"description": "Только записи задач, завершенные до выбранного времени, будут удалены.",
+				"finishedBefore": "Завершены до",
+				"status": "Статус завершения",
+				"allCompletedStatuses": "Все завершённые",
+				"reset": "Сбросить фильтры",
+				"submit": "Удалить записи",
+				"success": "Удалено записей задач: {{count}}",
+				"invalidDescription": "Укажите корректную дату завершения.",
+				"confirmDescription": "Это позволит удалить записи задач, выполненных до {{finishedBefore}} со статусом {{status}}.",
+				"confirmDescriptionPrefix": "Это позволит удалить записи задач, выполненных до",
+				"confirmDescriptionSuffix": "со статусом {{status}}."
+			},
+			"detail": {
+				"source": "Источник",
+				"createdAt": "Создан",
+				"updatedAt": "Обновлено",
+				"startedAt": "Начало выполнения",
+				"finishedAt": "Завершение",
+				"attempts": "Попытки",
+				"currentState": "Текущее состояние",
+				"steps": "Шаги",
+				"runtimeHealth": "Состояние сервисов",
+				"durationMs": "{{value}} мс"
+			},
+			"status": {
+				"pending": "В очереди",
+				"processing": "Выполняется",
+				"retry": "Повторная попытка",
+				"succeeded": "Выполнена",
+				"failed": "Ошибка",
+				"canceled": "Отменена"
+			},
+			"stepStatus": {
+				"pending": "В ожидании",
+				"active": "Выполняется",
+				"succeeded": "Выполнен",
+				"failed": "Ошибка",
+				"skipped": "Пропущен",
+				"canceled": "Отменён"
+			},
+			"kind": {
+				"system_runtime": "Служебная задача"
+			},
+			"presentation": {
+				"runtime_task_audit_cleanup": "Очистка журнала",
+				"runtime_task_auth_session_cleanup": "Очистка старых сессий сайта",
+				"runtime_task_background_task_dispatch": "Запуск фоновых задач",
+				"runtime_task_external_auth_flow_cleanup": "Очистка незавершённых попыток входа через внешние сервисы",
+				"runtime_task_mail_outbox_dispatch": "Отправка писем из очереди",
+				"runtime_task_system_health_check": "Проверка работоспособности сервиса",
+				"runtime_task_task_cleanup": "Очистка истории задач",
+				"runtime_task_yggdrasil_storage_consistency_check": "Проверка целостности хранилища Yggdrasil",
+				"runtime_task_yggdrasil_token_cleanup": "Очистка токенов Yggdrasil",
+				"runtime_task_yggdrasil_texture_cleanup": "Очистка текстур Yggdrasil",
+				"status_text_failed": "Ошибка: {{error}}",
+				"status_text_quiet": "Без изменений",
+				"status_text_succeeded": "Выполнено",
+				"status_text_system_healthy": "Сервис работает нормально",
+				"runtime_system_health_issue_detail": "Проблемы в компонентах: {{components}}",
+				"runtime_health_component_status": "{{component}} {{status}}"
+			},
+			"runtimeHealth": {
+				"status": {
+					"healthy": "Работает нормально",
+					"degraded": "Работает с ограничениями",
+					"unhealthy": "Не работает"
+				},
+				"component": {
+					"database": "База данных",
+					"admin_overview": "Обзор API",
+					"cache": "Кэш",
+					"mail": "Почта",
+					"background_tasks": "Фоновые задачи",
+					"storage": "Хранилище текстур",
+					"texture_storage_consistency": "Целостность объектного хранилища",
+					"yggdrasil": "Yggdrasil",
+					"yggdrasil_storage": "Хранилище Yggdrasil",
+					"yggdrasil_storage_consistency": "Целостность хранилища Yggdrasil"
+				}
+			},
+			"steps": {
+				"system_runtime": {}
+			}
+		}
+	}
+}

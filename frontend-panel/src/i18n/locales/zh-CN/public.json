@@ -1,0 +1,433 @@
+{
+	"home": {
+		"badge": "Yggdrasil API",
+		"heroEyebrow": "专为 Minecraft 打造",
+		"titleFallback": "AsterYggdrasil",
+		"loginRegister": "登录 / 注册",
+		"heroTitlePrefix": "你的 Minecraft",
+		"heroTitleAccent": "身份与皮肤中心",
+		"subtitle": "自建 Minecraft 皮肤站与 authlib-injector 认证服务器。",
+		"heroCopy": "AsterYggdrasil 提供安全、稳定、快速的 Yggdrasil 认证服务，以及强大易用的皮肤管理功能，让您的 Minecraft 体验更加完整。",
+		"primaryAction": "开始使用",
+		"textureLibraryAction": "公开材质库",
+		"consoleAction": "进入控制台",
+		"apiRoot": "API Root",
+		"skinDomains": "skinDomains",
+		"textureTypeSkin": "皮肤",
+		"textureTypeCape": "披风",
+		"featureSecureTitle": "安全可靠",
+		"featureSecureDescription": "基于 Yggdrasil 协议保障账号访问安全。",
+		"featureProfilesTitle": "玩家档案",
+		"featureProfilesDescription": "在自己的服务里管理 Minecraft 名称、UUID 和账号归属。",
+		"featureTexturesTitle": "皮肤管理",
+		"featureTexturesDescription": "上传、管理和分享您的 Minecraft 皮肤与披风。",
+		"featureAuthTitle": "启动器认证",
+		"featureAuthDescription": "使用站点账号完成兼容 authlib-injector 的启动器登录。",
+		"featureStableTitle": "快速稳定",
+		"featureStableDescription": "高性能认证服务，低延迟、高可用。",
+		"featureControlTitle": "管理员管控",
+		"featureControlDescription": "运行时配置、密钥和审计记录只在工作台内管理。",
+		"audienceHeadlinePrefix": "为",
+		"audienceHeadlineAccent": "Minecraft 玩家而生",
+		"audienceDescription": "无论您是服务器管理员、开发者，还是普通玩家，AsterYggdrasil 都能为您提供强大的支持。",
+		"audienceServerTitle": "服务器支持",
+		"audienceServerDescription": "为服务器提供稳定可靠的 Yggdrasil 认证服务。",
+		"audienceDeveloperTitle": "开发者友好",
+		"audienceDeveloperDescription": "简洁的 API 接口和文档，轻松集成。",
+		"audienceSkinTitle": "皮肤生态",
+		"audienceSkinDescription": "丰富的皮肤资源和管理功能，展现个性。",
+		"audienceCommunityTitle": "社区驱动",
+		"audienceCommunityDescription": "活跃的社区支持，共同打造更好的体验。"
+	},
+	"legal": {
+		"common": {
+			"contents": "页面目录",
+			"lastUpdatedLabel": "最后更新",
+			"lastUpdatedValue": "2026-06-19"
+		},
+		"tos": {
+			"pageTitle": "服务条款",
+			"badge": "站点规则",
+			"heading": "服务条款",
+			"lead": "使用本站账号、Minecraft 角色档案、材质衣柜、公开材质库或 Yggdrasil 认证接口，即表示你同意遵守本服务条款以及站点管理员公布的补充规则。",
+			"sections": {
+				"scope": {
+					"title": "一、服务范围与身份说明",
+					"body": {
+						"0": "本站提供自托管 Minecraft 皮肤站、账号工作台、玩家档案管理、材质上传与预览、公开材质库，以及兼容 authlib-injector 的 Yggdrasil 认证服务。具体可用功能取决于本站管理员启用的配置。",
+						"1": "本站不是 Mojang、Microsoft 或 Minecraft 官方服务，也不会替代官方账号体系。Minecraft 名称、商标、游戏客户端、官方皮肤服务和相关资产仍归其各自权利方所有。"
+					}
+				},
+				"account": {
+					"title": "二、账号、邀请与登录凭据",
+					"body": {
+						"0": "你应使用自己可控制的邮箱、用户名、密码、Passkey、外部登录身份或邀请链接，并对通过自己账号产生的角色档案、启动器会话、材质上传、举报和管理操作负责。",
+						"1": "不得冒用他人身份、盗用账号、共享敏感凭据、出售账号、批量注册、滥用邀请、绕过验证码或访问限制，也不得使用自动化请求影响认证、材质分发、邮件或后台任务的稳定性。",
+						"2": "管理员可以根据安全策略要求修改密码、验证邮箱、撤销会话、禁用账号、撤销邀请、调整用户角色或限制操作员权限。"
+					}
+				},
+				"profiles": {
+					"title": "三、Minecraft 玩家档案",
+					"body": {
+						"0": "你可以在账号下创建、重命名或删除 Minecraft 玩家档案。档案名称、UUID、绑定材质和审计记录会用于启动器登录、服务端会话校验和公开档案展示。",
+						"1": "档案名称不得冒充他人、引发混淆、违反社区规则或侵害第三方权益。管理员可以为安全、合规、滥用处理或争议处理需要重命名、冻结或删除档案；重命名和删除可能导致相关 Yggdrasil token 失效。"
+					}
+				},
+				"textures": {
+					"title": "四、材质衣柜与上传内容",
+					"body": {
+						"0": "你上传的皮肤、披风、头像或其他图片内容应由你拥有使用权，并应符合站点对文件大小、MIME 类型、PNG 格式、尺寸、模型类型、名称和标签的校验要求。",
+						"1": "不得上传违法、侵权、恶意、仇恨、骚扰、色情、暴力威胁、泄露个人信息、误导性冒充或明显破坏社区体验的材质内容。",
+						"2": "材质可以被设为私有或公开，具体可见性取决于你的设置、绑定档案、公开材质库状态和管理员操作。为了让 Minecraft 客户端、启动器和服务端正常读取，已绑定或已公开的材质 URL 可能被公开访问、预览、缓存或复制。"
+					}
+				},
+				"library": {
+					"title": "五、公开材质库、审核与举报",
+					"body": {
+						"0": "当你将材质提交到公开材质库时，即表示你允许本站展示该材质、显示相关名称、类型、模型、标签、哈希、尺寸、上传者信息和预览图，并允许其他用户在功能允许时复制到自己的衣柜使用。",
+						"1": "管理员可以根据站点规则审核、批准、拒绝、下架、重新分类或调整公开材质库条目和标签。审核备注、举报理由、处理结果和相关操作可能进入审计记录。",
+						"2": "你可以举报公开材质库中的违规内容，但不得恶意举报、重复骚扰、伪造证据或利用举报流程攻击其他用户。管理员可以接受或驳回举报，并视情况保留处理记录。"
+					}
+				},
+				"launcher": {
+					"title": "六、启动器与 Yggdrasil 协议访问",
+					"body": {
+						"0": "本站的 Yggdrasil 端点、authlib-injector 添加地址、材质签名、sessionserver 查询、join/hasJoined 校验和启动器上传接口，仅用于兼容 Minecraft 启动器、客户端、服务端和相关工具链。",
+						"1": "你不得向他人泄露 access token、client token、浏览器会话、Passkey 或其他认证材料，也不得伪造请求、重放 token、绕过限流、扫描私有接口或干扰其他玩家登录。",
+						"2": "协议兼容性可能随 Minecraft、authlib-injector 或本站版本变化而调整。管理员可以为安全、维护、密钥轮换、档案变更或滥用处理需要限制、暂停、刷新或失效会话。"
+					}
+				},
+				"security": {
+					"title": "七、安全与禁止行为",
+					"body": {
+						"0": "不得尝试未授权访问、提权、注入、暴力破解、拒绝服务、绕过 CSRF/CORS/限流、上传畸形文件、污染缓存、窃取令牌、抓取非公开数据或破坏审计链路。",
+						"1": "如果你发现安全漏洞，应在不扩大影响、不访问无关数据、不公开利用细节的前提下尽快联系管理员。管理员可以为排查风险临时限制账号、IP、端点或相关功能。"
+					}
+				},
+				"operations": {
+					"title": "八、运维、管理与可用性",
+					"body": {
+						"0": "管理员和被授权的操作员可以在权限范围内管理用户、邀请、外部登录、运行时配置、验证码、邮件、签名密钥、材质库、举报、后台任务、系统信息和审计记录。",
+						"1": "服务可能因升级、故障、迁移、备份、第三方服务异常、配置错误或安全事件而暂时不可用。管理员会尽量降低影响，但不保证服务永远无中断、无错误或完全兼容所有客户端。",
+						"2": "在法律允许范围内，本站按现状提供。因你违反条款、使用不受信任客户端、泄露凭据、上传违规内容或依赖非稳定接口造成的损失，由你自行承担。"
+					}
+				},
+				"changes": {
+					"title": "九、条款变更",
+					"body": {
+						"0": "管理员可能根据功能变化、部署环境、社区规则、安全要求或法律要求更新这些条款。重大变化应通过站点界面、公告或社区渠道提示。",
+						"1": "如果你不同意更新后的条款，应停止使用本站，并联系管理员处理账号、玩家档案、材质、公开库条目或其他相关数据。"
+					}
+				},
+				"contact": {
+					"title": "十、联系与争议处理",
+					"body": {
+						"0": "有关账号、材质权利、举报处理、数据请求或安全问题，应优先联系本站管理员，并提供足够定位问题的信息，例如账号、档案 UUID、材质 ID、举报编号或发生时间。",
+						"1": "本条款是站点服务规则，不构成法律意见。若本站管理员另行公布了更具体的社区规则、服务器规则或合规说明，二者应结合适用。"
+					}
+				}
+			}
+		},
+		"privacy": {
+			"pageTitle": "隐私政策",
+			"badge": "数据说明",
+			"heading": "隐私政策",
+			"lead": "本政策说明本站为了账号登录、Minecraft 玩家档案、材质托管、公开材质库、举报审核和 Yggdrasil 协议兼容，会处理哪些数据以及通常如何使用。",
+			"sections": {
+				"collected": {
+					"title": "一、我们处理的数据",
+					"body": {
+						"0": "本站可能保存用户名、邮箱、邮箱验证状态、密码哈希、角色权限、操作员权限、头像、语言偏好、账号状态、邀请记录和安全设置。",
+						"1": "本站可能保存 Minecraft 玩家档案名称、UUID、档案归属、皮肤和披风绑定关系、材质文件、材质名称、类型、模型、哈希、尺寸、MIME 类型、标签、可见性、公开库状态、审核备注、举报理由和举报处理记录。",
+						"2": "服务器还可能记录 IP 地址、用户代理、请求时间、请求路径、登录会话、Yggdrasil token 的必要校验数据、管理操作、错误日志、后台任务状态、邮件发送记录和审计事件。"
+					}
+				},
+				"auth": {
+					"title": "二、认证、Passkey 与外部登录",
+					"body": {
+						"0": "浏览器登录通常依赖安全 Cookie、CSRF token 和必要的本地缓存来维持会话、减少重复请求并显示最近用户状态。站点也可能保存会话过期时间、设备名称和令牌哈希。",
+						"1": "如果你使用 Passkey 或外部登录，本站会保存完成认证所需的公开凭证标识、提供方类型、外部身份标识、绑定状态和最近使用时间；本站不应保存你的生物识别原始数据或第三方账号密码。"
+					}
+				},
+				"profilesTextures": {
+					"title": "三、玩家档案与材质数据",
+					"body": {
+						"0": "玩家档案和材质数据用于让启动器、Minecraft 客户端和服务器识别你的角色、读取皮肤与披风、校验 sessionserver 响应，并在工作台中展示预览和管理状态。",
+						"1": "材质预览、头像渲染、图片校验和公开库展示可能产生派生图片、缓存条目或统计字段。删除、重命名或下架操作可能不会立即从所有客户端缓存、浏览器缓存或反向代理缓存中消失。"
+					}
+				},
+				"use": {
+					"title": "四、数据用途",
+					"body": {
+						"0": "这些数据用于账号注册与登录、邀请接受、密码重置、邮箱验证、Passkey 管理、外部登录绑定、启动器认证、档案管理、材质上传、材质分发、公开库审核、举报处理、权限控制、通知、安全审计和故障排查。",
+						"1": "管理员不应把数据用于与本站身份、材质、认证、社区治理和服务运维无关的目的，除非已获得你的同意、为保护用户或服务安全所必需，或法律要求。"
+					}
+				},
+				"public": {
+					"title": "五、公开可见信息",
+					"body": {
+						"0": "玩家档案名称、UUID、已绑定的皮肤和披风可能会通过 Yggdrasil metadata、sessionserver 响应、材质 URL、公开读取接口、启动器、Minecraft 客户端和服务器对外可见。",
+						"1": "提交并通过审核的公开材质库条目可能展示材质名称、类型、模型、标签、预览图、上传者公开标识、创建和更新时间，并可能被其他用户复制到自己的衣柜。",
+						"2": "请不要上传你不希望被其他玩家、服务器、启动器、浏览器缓存、CDN、反向代理或搜索/归档工具看到的材质内容。"
+					}
+				},
+				"logs": {
+					"title": "六、日志、审计与后台任务",
+					"body": {
+						"0": "本站会记录与安全和运维有关的事件，例如登录、登出、刷新 token、修改密码、Passkey 操作、外部登录绑定、档案变更、材质上传/绑定/删除、公开库提交/审核/下架、举报提交/处理、配置变更、邮件发送和任务重试。",
+						"1": "审计记录可能包含操作者、目标对象、时间、操作类型、结果、简要详情和展示用元数据。管理员使用这些记录来排查故障、处理滥用、追踪权限操作和满足必要的合规要求。"
+					}
+				},
+				"security": {
+					"title": "七、安全保护",
+					"body": {
+						"0": "密码、Yggdrasil token、会话 secret、client token、签名私钥和其他敏感材料应只以哈希、加密或运行服务所需的最小必要形式保存，明文凭据不应写入日志、审计记录或错误消息。",
+						"1": "如果你怀疑账号、令牌、邮箱、Passkey 或外部登录身份被盗用，应尽快修改密码、撤销其他会话、删除可疑 Passkey 或外部绑定，并联系站点管理员。"
+					}
+				},
+				"sharing": {
+					"title": "八、数据共享与第三方处理",
+					"body": {
+						"0": "本站不会主动出售你的个人数据。运行服务所需的数据库、对象存储、缓存、邮件服务、验证码组件、反向代理、日志系统、备份系统或托管环境可能会处理必要数据。",
+						"1": "如果你使用外部登录，相关提供方可能按照其自身政策处理你的登录请求、身份标识、回调地址和授权状态。本站只能控制自己保存和处理的数据。",
+						"2": "当法律要求、安全事件、滥用处理、权利投诉、社区治理或服务迁移需要时，管理员可能会查看、导出或提供相关日志、账号记录、材质记录和举报记录。"
+					}
+				},
+				"retention": {
+					"title": "九、保留与删除",
+					"body": {
+						"0": "账号、玩家档案、材质、公开库条目、举报、审计、邮件和日志会按站点配置、备份周期、管理员策略和适用规则保留。删除账号、档案或材质时，部分安全日志、审计记录、备份和缓存可能仍保留一段时间。",
+						"1": "由于材质 URL、公开库内容和 Yggdrasil 响应可能被客户端、服务器、浏览器或代理缓存，删除或下架并不保证已经分发到外部环境的数据立即失效。"
+					}
+				},
+				"rights": {
+					"title": "十、你的选择与请求",
+					"body": {
+						"0": "你可以在工作台内管理账号资料、密码、会话、Passkey、外部登录绑定、玩家档案、材质衣柜、标签和公开库提交；可用选项取决于管理员开放的功能。",
+						"1": "你可以联系管理员请求访问、更正、导出、删除或限制处理与自己账号相关的数据。管理员会根据身份验证结果、站点能力、安全要求、备份限制和适用规则处理。"
+					}
+				},
+				"contact": {
+					"title": "十一、联系与政策更新",
+					"body": {
+						"0": "有关隐私、数据删除、安全事件、材质权利或举报处理的问题，请联系本站管理员，并提供账号、邮箱、档案 UUID、材质 ID、举报编号或相关时间范围以便定位。",
+						"1": "管理员可能根据功能、部署环境、数据处理方式或法律要求更新本政策。继续使用本站即表示你知悉更新后的数据处理说明。"
+					}
+				}
+			}
+		}
+	},
+	"errorPage": {
+		"notFoundTitle": "抱歉，页面未找到",
+		"genericTitle": "页面加载失败",
+		"notFoundDescription": "看起来你走错了方向，找不到这个页面了。",
+		"genericDescription": "当前页面在渲染前失败了。你可以返回首页，或者回到上一页重试。",
+		"backHome": "返回首页",
+		"backPrevious": "返回上一页",
+		"errorCode": "错误代码：",
+		"supportPanel": "错误原因与帮助",
+		"reasonTitle": "可能的原因：",
+		"reasonAddress": "输入的地址可能有误",
+		"reasonMoved": "页面可能已被移动或删除",
+		"reasonPermission": "你可能没有访问此页面的权限",
+		"helpTitle": "需要帮助？",
+		"helpDescription": "如果你认为这是一个错误，请带上错误代码联系站点管理员。",
+		"detailExpand": "显示错误详情",
+		"detailCollapse": "收起错误详情"
+	},
+	"launcher": {
+		"title": "启动器接入",
+		"description": "在启动器里添加这个认证服务器，然后用本站账号登录。",
+		"userTitle": "把本站添加到启动器",
+		"profileTitle": "让启动器使用角色档案",
+		"userDescription": "在支持 authlib-injector 的启动器里添加这个认证服务器，然后用本站账号登录。登录后选择你的 Minecraft 角色档案即可进入游戏。",
+		"protocolBadge": "Yggdrasil API 外置登录",
+		"openProfiles": "管理角色档案",
+		"externalLoginName": "启动器里选择“外置登录”",
+		"externalLoginDescription": "账号和密码使用本站登录信息。",
+		"apiRootHint": "如果启动器要求填写认证服务器地址，填入这里展示的 API Root。",
+		"selectProfile": "登录后选择你的角色档案",
+		"selectProfileName": "登录后选择想要的角色档案",
+		"selectProfileDescription": "角色、皮肤和披风会从本站同步到启动器。",
+		"profileHint": "角色档案和皮肤在本站管理，启动器只负责登录和启动游戏。",
+		"dragToLauncher": "拖到启动器添加",
+		"dragHint": "支持拖拽添加服务器的启动器会自动识别 authlib-injector 地址。",
+		"serverOwnerTitle": "服主接入 Minecraft 服务端",
+		"serverOwnerDescription": "把 authlib-injector.jar 放在服务端目录，在 -jar 之前加入下面的 JVM 参数，并保持 online-mode=true。",
+		"jvmArg": "JVM 参数",
+		"serverCommand": "启动命令示例",
+		"secureProfileTitle": "1.19 及以上推荐配置",
+		"secureProfileDescription": "authlib-injector v1.2.0 起建议保持安全档案校验开启。请在 server.properties 中保留下面两项，再使用同一个启动命令。",
+		"connectionTitle": "认证服务器",
+		"connectionDescription": "只有启动器不能拖拽导入时，玩家才需要手动填写这个地址。",
+		"domainsTitle": "材质 URL",
+		"domainsDescription": "皮肤和披风地址会在启动器登录后自动解析。"
+	},
+	"init": {
+		"title": "完成初始设置",
+		"headline": "完成 Aster 初始设置",
+		"description": "当前还没有管理员账号。先创建首个管理员，并设置对外访问本站时使用的公开地址。",
+		"cardDescription": "这个账号会成为首个管理员。公开站点 URL 会用于生成启动器接入地址和材质地址。",
+		"publicSiteUrl": "公开站点 URL",
+		"publicSiteUrlHelp": "填写玩家、启动器和 Minecraft 客户端能访问到的站点根地址，只填协议和域名，可带端口，不要带路径。",
+		"publicSiteUrlRequired": "请填写公开站点 URL。",
+		"publicSiteUrlInvalid": "公开站点 URL 格式不正确。",
+		"publicSiteUrlProtocol": "公开站点 URL 只支持 http 或 https。",
+		"publicSiteUrlOriginOnly": "公开站点 URL 只能是站点根地址，不能包含路径、查询参数或锚点。",
+		"publicSiteUrlHttpWarning": "公网部署建议使用 HTTPS。HTTP 仅适合 localhost 或内网调试。",
+		"createAdmin": "创建管理员",
+		"setupComplete": "初始化完成",
+		"footer": "{{name}} 初始化向导",
+		"featureAdminTitle": "首个管理员",
+		"featureAdminDescription": "创建后可管理运行时配置、角色档案、材质和审计记录。",
+		"featureUrlTitle": "一个公开 URL",
+		"featureUrlDescription": "站点、Yggdrasil API 和材质地址从这一个公开站点 URL 派生。",
+		"featurePlayerTitle": "客户端兼容",
+		"featurePlayerDescription": "材质域会自动包含本站域名、Minecraft 官方域名和 Mojang 官方域名。"
+	},
+	"login": {
+		"title": "登录",
+		"setupTitle": "创建首个管理员",
+		"registerTitle": "创建账户",
+		"eyebrow": "兼容 authlib-injector",
+		"welcomeTitle": "欢迎回来。",
+		"welcomePrefix": "欢迎回来！登录你的",
+		"welcomeSuffix": "账户",
+		"welcomeDescription": "在工作台里管理 Minecraft 角色档案、皮肤、披风、启动器会话和账号权限。",
+		"headline": "登录后管理 Minecraft 角色档案和材质。",
+		"setupHeadline": "先初始化这个 Yggdrasil 服务器，再允许玩家登录。",
+		"description": "在这里管理账户、角色和皮肤。",
+		"setupDescription": "当前还没有管理员账号。创建首个管理员账号后完成初始化。",
+		"cardDescription": "使用与 启动器相同的用户名和密码。",
+		"setupCardDescription": "这个账号会成为首个管理员，可管理运行时配置、角色档案、材质和审计记录。",
+		"registerDescription": "请慎重选择游戏昵称。注册后无法修改。",
+		"registerHeadline": "创建账户。",
+		"registerHeroDescription": "创建账户并选择你的游戏外观。",
+		"identifier": "邮箱或用户名",
+		"username": "用户名",
+		"email": "邮箱",
+		"password": "密码",
+		"captcha": "图形验证码",
+		"captchaImageAlt": "图形验证码",
+		"captchaUnavailable": "验证码加载失败，请刷新重试",
+		"refreshCaptcha": "刷新验证码",
+		"captchaPlaceholder": "请输入图中字符",
+		"identifierPlaceholder": "请输入邮箱或用户名",
+		"usernamePlaceholder": "4-16 位字符，支持字母、数字、下划线和连字符",
+		"emailPlaceholder": "请输入有效的邮箱地址",
+		"passwordPlaceholder": "请输入密码",
+		"confirmPassword": "确认密码",
+		"confirmPasswordPlaceholder": "请再次输入密码",
+		"passwordMismatch": "两次输入的密码不一致。",
+		"validationFailed": "请检查标记的字段后重试。",
+		"validationIdentifierRequired": "请输入邮箱或用户名。",
+		"validationUsernameLength": "用户名长度需为 4-16 个字符。",
+		"validationUsernameChars": "用户名只能包含字母、数字、下划线和连字符。",
+		"validationEmailRequired": "请输入邮箱地址。",
+		"validationEmailInvalid": "请输入有效的邮箱地址。",
+		"validationPasswordRequired": "请输入密码。",
+		"validationCaptchaRequired": "请输入图形验证码。",
+		"validationPasswordLength": "密码长度需为 8-128 个字符。",
+		"validationConfirmRequired": "请确认密码。",
+		"validationAcceptTerms": "请确认此账户用于 Aster 认证管理。",
+		"passwordStrength": "密码强度",
+		"passwordStrengthWeak": "弱",
+		"passwordStrengthMedium": "中",
+		"passwordStrengthStrong": "强",
+		"acceptTerms": "我确认此账户用于 Aster 的角色档案、材质与认证管理。",
+		"checking": "正在检查初始化状态",
+		"createAdmin": "创建管理员",
+		"setupComplete": "初始化完成",
+		"loginSuccess": "欢迎回来",
+		"registerSuccess": "账户已创建",
+		"registerActivationSent": "账户已创建，请查收邮件完成激活。",
+		"activationSuccess": "邮箱已验证，现在可以登录。",
+		"contactVerificationInvalid": "验证链接无效或已经使用。",
+		"contactVerificationExpired": "验证链接已过期，请重新请求。",
+		"contactVerificationMissing": "验证链接缺少 token。",
+		"forgotPassword": "忘记密码？",
+		"passwordResetRequestDescription": "输入账号邮箱，我们会发送一封密码重置邮件。为了防止枚举，提交后不会暴露账号是否存在。",
+		"passwordResetRequestSubmit": "发送重置邮件",
+		"passwordResetRequestSubmitting": "发送中",
+		"passwordResetRequested": "如果邮箱存在，重置邮件会发送到该地址。",
+		"resetPasswordTitle": "重置密码",
+		"resetPasswordDescription": "设置一个新的登录密码。完成后其他已登录会话会失效。",
+		"resetPasswordSubmit": "更新密码",
+		"resetPasswordSubmitting": "更新中",
+		"passwordResetSuccess": "密码已重置，请使用新密码登录。",
+		"forcePasswordChangeEyebrow": "安全验证",
+		"forcePasswordChangeTitle": "需要修改密码",
+		"forcePasswordChangeDescription": "管理员要求你在继续使用工作台前修改登录密码。完成后会重新签发正常会话。",
+		"forcePasswordChangeSubmit": "修改密码",
+		"forcePasswordChangeSuccess": "密码已修改",
+		"currentPassword": "当前密码",
+		"newPassword": "新密码",
+		"validationPasswordSameAsCurrent": "新密码不能与当前密码相同。",
+		"resetPasswordInvalidTitle": "重置链接无效",
+		"resetPasswordInvalidDescription": "这个链接不存在、已经使用过，或不是密码重置链接。",
+		"resetPasswordExpiredTitle": "重置链接已过期",
+		"resetPasswordExpiredDescription": "这个密码重置链接已过期，请重新请求一封邮件。",
+		"requestNewResetLink": "重新发送重置邮件",
+		"backToLogin": "返回登录",
+		"language": "语言",
+		"languageRu": "Русский",
+		"languageZh": "简体中文",
+		"languageEn": "English",
+		"showPassword": "显示密码",
+		"hidePassword": "隐藏密码",
+		"passkeyLogin": "使用 Passkey 登录",
+		"passkeyUnsupported": "当前浏览器不支持 Passkey。",
+		"passkeyCancelled": "Passkey 验证已取消。",
+		"or": "或",
+		"externalLogin": "使用 {{provider}} 登录",
+		"externalAuthRecoveryTitle": "需要确认这个外部账户",
+		"externalAuthRecoveryDescription": "这个外部身份的邮箱还不能直接用于登录。你可以用现有站点账号密码绑定它，或通过邮箱验证完成创建/绑定。",
+		"externalAuthPasswordTab": "绑定现有账号",
+		"externalAuthEmailTab": "邮箱验证",
+		"externalAuthPasswordSubmit": "绑定并登录",
+		"externalAuthPasswordLinking": "正在绑定",
+		"externalAuthPasswordLinked": "外部账户已绑定",
+		"externalAuthEmailSubmit": "发送验证邮件",
+		"externalAuthEmailSending": "发送中",
+		"externalAuthEmailSentTitle": "验证邮件已发送",
+		"externalAuthEmailSentHint": "请打开邮件中的链接完成验证。验证通过后会自动回到登录流程。",
+		"externalAuthEmailSentToast": "验证邮件已发送",
+		"externalAuthEmailMissing": "外部认证邮箱验证链接缺少 token。",
+		"externalAuthEmailInvalid": "外部认证邮箱验证链接无效或已经使用。",
+		"externalAuthEmailExpired": "外部认证邮箱验证链接已过期，请重新发起登录。",
+		"externalAuthFailed": "外部认证失败，请重新发起登录。",
+		"noAccount": "还没有账户？",
+		"hasAccount": "已有账户？",
+		"registerNow": "立即注册",
+		"secureFooter": "由 {{name}} 提供安全认证服务",
+		"protocolFooter": "网站和启动器共用一个账户。",
+		"featureSecureTitle": "安全认证",
+		"featureSecureDescription": "使用站点账号完成兼容 Yggdrasil 的启动器认证。",
+		"featureProfileTitle": "角色管理",
+		"featureProfileDescription": "上传你的游戏皮肤。",
+		"featureAuditTitle": "权限控制",
+		"featureAuditDescription": "管理员操作和敏感变更会进入审计日志，方便追踪。",
+		"registerFeatureSecureTitle": "安全可靠",
+		"registerFeatureSecureDescription": "基于兼容 Yggdrasil 的认证能力保护您的账户安全。",
+		"registerFeatureProfileTitle": "个性定制",
+		"registerFeatureProfileDescription": "一个账号对应一个角色。上传皮肤后立即生效。",
+		"registerFeatureAuditTitle": "权限管理",
+		"registerFeatureAuditDescription": "权限与安全敏感变更都在工作台内处理。",
+		"registerConsentHint": "注册即表示您的账户将加入此 Aster 认证服务器。"
+	},
+	"invite": {
+		"pageTitle": "接受邀请",
+		"headline": "接受邀请并创建站点账户。",
+		"heroDescription": "使用邀请链接加入此 Aster 认证服务器，创建账户后即可进入工作台管理角色档案、材质和账号安全。",
+		"cardTitle": "邀请",
+		"cardDescription": "{{email}} 已被邀请加入此服务器。邀请将在 {{expiresAt}} 过期。",
+		"cardDescriptionEmail": "{{email}} 已被邀请加入此服务器。",
+		"cardDescriptionExpiresAt": "邀请将在",
+		"loading": "正在检查邀请",
+		"invalid": "邀请令牌缺失。",
+		"accept": "接受邀请",
+		"accepting": "正在创建账户...",
+		"accepted": "账户已创建",
+		"backToLogin": "返回登录"
+	}
+}

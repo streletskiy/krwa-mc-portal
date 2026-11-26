@@ -1,0 +1,429 @@
+//! Minecraft profile repository.
+
+use crate::api::pagination::{OffsetPage, load_offset_page};
+use crate::db::repository::search_query;
+use crate::entities::minecraft_profile::{self, Entity as MinecraftProfile};
+use crate::errors::{AsterError, MapAsterErr, Result};
+use crate::types::MinecraftTextureModel;
+use chrono::{DateTime, Utc};
+use sea_orm::{
+    ActiveModelTrait, ColumnTrait, ConnectionTrait, EntityTrait, ExprTrait, PaginatorTrait,
+    QueryFilter, QueryOrder, QuerySelect, Set,
+};
+
+#[derive(Debug, Clone, Default)]
+pub struct MinecraftProfileFilters {
+    pub user_id: Option<i64>,
+    pub name: Option<String>,
+    pub uuid: Option<String>,
+    pub query: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CursorSlice<T> {
+    pub items: Vec<T>,
+    pub total: u64,
+    pub has_more: bool,
+}
+
+pub async fn create<C: ConnectionTrait>(
+    db: &C,
+    user_id: i64,
+    uuid: &str,
+    name: &str,
+    texture_model: MinecraftTextureModel,
+    uploadable_textures: &str,
+) -> Result<minecraft_profile::Model> {
+    let now = chrono::Utc::now();
+    minecraft_profile::ActiveModel {
+        user_id: Set(user_id),
+        uuid: Set(uuid.to_string()),
+        name: Set(name.to_string()),
+        texture_model: Set(texture_model),
+        uploadable_textures: Set(uploadable_textures.to_string()),
+        created_at: Set(now),
+        updated_at: Set(now),
+        ..Default::default()
+    }
+    .insert(db)
+    .await
+    .map_aster_err(AsterError::database_operation)
+}
+
+pub async fn count_all<C: ConnectionTrait>(db: &C) -> Result<u64> {
+    MinecraftProfile::find()
+        .count(db)
+        .await
+        .map_aster_err(AsterError::database_operation)
+}
+
+/// Serialize creation for an account before checking its single-character limit.
+/// The no-op user update acquires a write lock on SQLite and a row lock on
+/// PostgreSQL/MySQL. Both the check and insert use the same writer transaction.
+pub async fn create_single<C: sea_orm::TransactionTrait>(
+    db: &C,
+    user_id: i64,
+    uuid: &str,
+    name: &str,
+    texture_model: MinecraftTextureModel,
+    uploadable_textures: &str,
+) -> Result<minecraft_profile::Model> {
+    crate::db::transaction::with_transaction(db, async |txn| {
+        use crate::entities::user;
+        user::Entity::update_many()
+            .col_expr(user::Column::Id, sea_orm::sea_query::Expr::value(user_id))
+            .filter(user::Column::Id.eq(user_id))
+            .exec(txn)
+            .await
+            .map_aster_err(AsterError::database_operation)?;
+        if !list_by_user(txn, user_id).await?.is_empty() {
+            return Err(AsterError::validation_error_code(
+                crate::api::error_code::AsterErrorCode::MinecraftProfileLimitExceeded,
+                "Each account can have only one Minecraft character",
+            ));
+        }
+        create(txn, user_id, uuid, name, texture_model, uploadable_textures).await
+    })
+    .await
+}
+
+pub async fn count_created_between<C: ConnectionTrait>(
+    db: &C,
+    start: DateTime<Utc>,
+    end: DateTime<Utc>,
+) -> Result<u64> {
+    MinecraftProfile::find()
+        .filter(minecraft_profile::Column::CreatedAt.gte(start))
+        .filter(minecraft_profile::Column::CreatedAt.lt(end))
+        .count(db)
+        .await
+        .map_aster_err(AsterError::database_operation)
+}
+
+pub async fn find_by_id<C: ConnectionTrait>(db: &C, id: i64) -> Result<minecraft_profile::Model> {
+    MinecraftProfile::find_by_id(id)
+        .one(db)
+        .await
+        .map_aster_err(AsterError::database_operation)?
+        .ok_or_else(|| AsterError::record_not_found(format!("minecraft profile #{id}")))
+}
+
+pub async fn find_by_uuid<C: ConnectionTrait>(
+    db: &C,
+    uuid: &str,
+) -> Result<Option<minecraft_profile::Model>> {
+    MinecraftProfile::find()
+        .filter(minecraft_profile::Column::Uuid.eq(uuid))
+        .one(db)
+        .await
+        .map_aster_err(AsterError::database_operation)
+}
+
+pub async fn find_by_uuid_for_user<C: ConnectionTrait>(
+    db: &C,
+    uuid: &str,
+    user_id: i64,
+) -> Result<Option<minecraft_profile::Model>> {
+    MinecraftProfile::find()
+        .filter(minecraft_profile::Column::Uuid.eq(uuid))
+        .filter(minecraft_profile::Column::UserId.eq(user_id))
+        .one(db)
+        .await
+        .map_aster_err(AsterError::database_operation)
+}
+
+pub async fn find_by_name<C: ConnectionTrait>(
+    db: &C,
+    name: &str,
+) -> Result<Option<minecraft_profile::Model>> {
+    MinecraftProfile::find()
+        .filter(minecraft_profile::Column::Name.eq(name))
+        .one(db)
+        .await
+        .map_aster_err(AsterError::database_operation)
+}
+
+pub async fn delete_by_id<C: ConnectionTrait>(
+    db: &C,
+    id: i64,
+) -> Result<Option<minecraft_profile::Model>> {
+    let Some(existing) = MinecraftProfile::find_by_id(id)
+        .one(db)
+        .await
+        .map_aster_err(AsterError::database_operation)?
+    else {
+        return Ok(None);
+    };
+    let active: minecraft_profile::ActiveModel = existing.clone().into();
+    active
+        .delete(db)
+        .await
+        .map_aster_err(AsterError::database_operation)?;
+    Ok(Some(existing))
+}
+
+pub async fn update_name_by_id<C: ConnectionTrait>(
+    db: &C,
+    id: i64,
+    name: &str,
+) -> Result<Option<minecraft_profile::Model>> {
+    let Some(existing) = MinecraftProfile::find_by_id(id)
+        .one(db)
+        .await
+        .map_aster_err(AsterError::database_operation)?
+    else {
+        return Ok(None);
+    };
+    let mut active: minecraft_profile::ActiveModel = existing.into();
+    active.name = Set(name.to_string());
+    active.updated_at = Set(chrono::Utc::now());
+    let updated = active
+        .update(db)
+        .await
+        .map_aster_err(AsterError::database_operation)?;
+    Ok(Some(updated))
+}
+
+pub async fn list_by_user<C: ConnectionTrait>(
+    db: &C,
+    user_id: i64,
+) -> Result<Vec<minecraft_profile::Model>> {
+    MinecraftProfile::find()
+        .filter(minecraft_profile::Column::UserId.eq(user_id))
+        .order_by_asc(minecraft_profile::Column::Id)
+        .all(db)
+        .await
+        .map_aster_err(AsterError::database_operation)
+}
+
+pub async fn list_paginated<C: ConnectionTrait>(
+    db: &C,
+    filters: MinecraftProfileFilters,
+    limit: u64,
+    offset: u64,
+) -> Result<OffsetPage<minecraft_profile::Model>> {
+    load_offset_page(limit, offset, 100, |limit, offset| async move {
+        let query = apply_filters(MinecraftProfile::find(), &filters)
+            .order_by_asc(minecraft_profile::Column::Id);
+        let total = query
+            .clone()
+            .count(db)
+            .await
+            .map_aster_err(AsterError::database_operation)?;
+        let items = query
+            .limit(limit)
+            .offset(offset)
+            .all(db)
+            .await
+            .map_aster_err(AsterError::database_operation)?;
+        Ok((items, total))
+    })
+    .await
+}
+
+pub async fn list_cursor<C: ConnectionTrait>(
+    db: &C,
+    filters: MinecraftProfileFilters,
+    limit: u64,
+    after_id: Option<i64>,
+) -> Result<CursorSlice<minecraft_profile::Model>> {
+    let base = apply_filters(MinecraftProfile::find(), &filters);
+    let total = base
+        .clone()
+        .count(db)
+        .await
+        .map_aster_err(AsterError::database_operation)?;
+    if total == 0 || limit == 0 {
+        return Ok(CursorSlice {
+            items: Vec::new(),
+            total,
+            has_more: false,
+        });
+    }
+
+    let mut query = base;
+    if let Some(after_id) = after_id {
+        query = query.filter(minecraft_profile::Column::Id.gt(after_id));
+    }
+
+    let mut items = query
+        .order_by_asc(minecraft_profile::Column::Id)
+        .limit(limit.saturating_add(1))
+        .all(db)
+        .await
+        .map_aster_err(AsterError::database_operation)?;
+    let has_more =
+        crate::utils::numbers::usize_to_u64(items.len(), "minecraft profile cursor page size")?
+            > limit;
+    if has_more {
+        items.truncate(crate::utils::numbers::u64_to_usize(
+            limit,
+            "minecraft profile cursor limit",
+        )?);
+    }
+
+    Ok(CursorSlice {
+        items,
+        total,
+        has_more,
+    })
+}
+
+fn apply_filters(
+    mut query: sea_orm::Select<MinecraftProfile>,
+    filters: &MinecraftProfileFilters,
+) -> sea_orm::Select<MinecraftProfile> {
+    if let Some(user_id) = filters.user_id {
+        query = query.filter(minecraft_profile::Column::UserId.eq(user_id));
+    }
+    if let Some(name) = filters
+        .name
+        .as_deref()
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+    {
+        query = query.filter(minecraft_profile::Column::Name.eq(name));
+    }
+    if let Some(uuid) = filters
+        .uuid
+        .as_deref()
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+    {
+        query = query.filter(minecraft_profile::Column::Uuid.eq(uuid));
+    }
+    if let Some(search) = filters
+        .query
+        .as_deref()
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+    {
+        query = query.filter(
+            search_query::lower_like_condition(minecraft_profile::Column::Name, search).or(
+                search_query::lower_like_condition(minecraft_profile::Column::Uuid, search),
+            ),
+        );
+    }
+    query
+}
+
+pub async fn list_by_names<C: ConnectionTrait>(
+    db: &C,
+    names: &[String],
+) -> Result<Vec<minecraft_profile::Model>> {
+    if names.is_empty() {
+        return Ok(Vec::new());
+    }
+
+    MinecraftProfile::find()
+        .filter(minecraft_profile::Column::Name.is_in(names.iter().cloned()))
+        .order_by_asc(minecraft_profile::Column::Id)
+        .all(db)
+        .await
+        .map_aster_err(AsterError::database_operation)
+}
+
+#[cfg(test)]
+mod single_character_tests {
+    use super::*;
+    use crate::db::repository::user_repo;
+
+    #[tokio::test]
+    async fn single_character_limit_is_atomic_and_preserves_existing_profile() {
+        let db = crate::db::connect_with_metrics(
+            &crate::config::DatabaseConfig {
+                url: "sqlite::memory:".to_string(),
+                pool_size: 1,
+                retry_count: 0,
+            },
+            crate::metrics_core::NoopMetrics::arc(),
+        )
+        .await
+        .unwrap();
+        migration::Migrator::up(&db, None).await.unwrap();
+        let owner = user_repo::create(
+            &db,
+            "owner",
+            "owner@example.test",
+            "test-hash",
+            crate::types::UserRole::User,
+        )
+        .await
+        .unwrap();
+        let first_uuid = crate::utils::id::new_unsigned_uuid();
+        let second_uuid = crate::utils::id::new_unsigned_uuid();
+        let (first, second) = tokio::join!(
+            create_single(
+                &db,
+                owner.id,
+                &first_uuid,
+                "First",
+                MinecraftTextureModel::Default,
+                "skin,cape"
+            ),
+            create_single(
+                &db,
+                owner.id,
+                &second_uuid,
+                "Second",
+                MinecraftTextureModel::Default,
+                "skin,cape"
+            ),
+        );
+        assert_ne!(
+            first.is_ok(),
+            second.is_ok(),
+            "exactly one concurrent creation succeeds"
+        );
+        let profiles = list_by_user(&db, owner.id).await.unwrap();
+        assert_eq!(profiles.len(), 1);
+        let original = profiles[0].clone();
+        let rejected = create_single(
+            &db,
+            owner.id,
+            &crate::utils::id::new_unsigned_uuid(),
+            "Third",
+            MinecraftTextureModel::Default,
+            "skin,cape",
+        )
+        .await;
+        assert!(rejected.is_err());
+        let after = list_by_user(&db, owner.id).await.unwrap();
+        assert_eq!(after[0].uuid, original.uuid);
+        assert_eq!(after[0].name, original.name);
+        let other = user_repo::create(
+            &db,
+            "other",
+            "other@example.test",
+            "test-hash",
+            crate::types::UserRole::User,
+        )
+        .await
+        .unwrap();
+        assert!(
+            create_single(
+                &db,
+                other.id,
+                &crate::utils::id::new_unsigned_uuid(),
+                "Other",
+                MinecraftTextureModel::Default,
+                "skin,cape"
+            )
+            .await
+            .is_ok()
+        );
+        delete_by_id(&db, original.id).await.unwrap();
+        assert!(
+            create_single(
+                &db,
+                owner.id,
+                &crate::utils::id::new_unsigned_uuid(),
+                "Replacement",
+                MinecraftTextureModel::Default,
+                "skin,cape"
+            )
+            .await
+            .is_ok()
+        );
+    }
+}

@@ -1,0 +1,437 @@
+{
+	"home": {
+		"badge": "Yggdrasil API",
+		"heroEyebrow": "Built for Minecraft",
+		"titleFallback": "AsterYggdrasil",
+		"loginRegister": "Login / Register",
+		"heroTitlePrefix": "Your Minecraft",
+		"heroTitleAccent": "identity and skin hub",
+		"subtitle": "Self-hosted Minecraft skin site and authlib-injector compatible authentication server.",
+		"heroCopy": "AsterYggdrasil provides secure, stable, and fast Yggdrasil authentication with easy skin management for a complete Minecraft experience.",
+		"primaryAction": "Get started",
+		"textureLibraryAction": "Public texture library",
+		"consoleAction": "Enter console",
+		"apiRoot": "API Root",
+		"skinDomains": "skinDomains",
+		"textureTypeSkin": "Skin",
+		"textureTypeCape": "Cape",
+		"featureSecureTitle": "Safe and reliable",
+		"featureSecureDescription": "Yggdrasil-compatible authentication keeps account access controlled.",
+		"featureProfilesTitle": "Player profiles",
+		"featureProfilesDescription": "Keep Minecraft names, UUIDs, and account ownership under your own service.",
+		"featureTexturesTitle": "Skin management",
+		"featureTexturesDescription": "Upload, manage, and share Minecraft skins and capes after signing in.",
+		"featureAuthTitle": "Launcher authentication",
+		"featureAuthDescription": "Use site accounts for authlib-injector compatible launcher login.",
+		"featureStableTitle": "Fast and stable",
+		"featureStableDescription": "Low-latency authentication paths are designed for high availability.",
+		"featureControlTitle": "Managed by admins",
+		"featureControlDescription": "Runtime settings, keys, and audit records stay behind the admin workbench.",
+		"audienceHeadlinePrefix": "Built for",
+		"audienceHeadlineAccent": "Minecraft players",
+		"audienceDescription": "Whether you run a server, build integrations, or just want a clean skin workflow, AsterYggdrasil keeps the core tools close at hand.",
+		"audienceServerTitle": "Server support",
+		"audienceServerDescription": "Provide reliable Yggdrasil authentication for Minecraft server operators.",
+		"audienceDeveloperTitle": "Developer friendly",
+		"audienceDeveloperDescription": "Clear API endpoints and integration values make deployment easier.",
+		"audienceSkinTitle": "Skin ecosystem",
+		"audienceSkinDescription": "Rich skin and cape management helps players express their style.",
+		"audienceCommunityTitle": "Community driven",
+		"audienceCommunityDescription": "Support shared communities with controlled account and profile workflows."
+	},
+	"legal": {
+		"common": {
+			"contents": "Page contents",
+			"lastUpdatedLabel": "Last updated",
+			"lastUpdatedValue": "2026-06-19"
+		},
+		"tos": {
+			"pageTitle": "Terms of Service",
+			"badge": "Site rules",
+			"heading": "Terms of Service",
+			"lead": "By using this site account, Minecraft profiles, texture wardrobe, public texture library, or Yggdrasil authentication endpoints, you agree to these Terms of Service and any supplemental rules published by the site administrators.",
+			"sections": {
+				"scope": {
+					"title": "1. Service Scope and Status",
+					"body": {
+						"0": "This site provides a self-hosted Minecraft skin site, account workbench, player profile management, texture upload and preview, public texture library, and authlib-injector compatible Yggdrasil authentication. The exact available features depend on the configuration enabled by this site's administrators.",
+						"1": "This site is not an official Mojang, Microsoft, or Minecraft service and does not replace the official account system. Minecraft names, trademarks, game clients, official skin services, and related assets remain owned by their respective rights holders."
+					}
+				},
+				"account": {
+					"title": "2. Accounts, Invitations, and Credentials",
+					"body": {
+						"0": "You should use an email address, username, password, passkey, external login identity, or invitation link that you control. You are responsible for player profiles, launcher sessions, texture uploads, reports, and administration actions made through your account.",
+						"1": "Do not impersonate others, steal accounts, share sensitive credentials, sell accounts, register in bulk, abuse invitations, bypass CAPTCHA or access controls, or use automated requests in a way that harms authentication, texture delivery, mail, or background task stability.",
+						"2": "Administrators may require password changes or email verification, revoke sessions, disable accounts, revoke invitations, adjust user roles, or restrict operator scopes according to the site's security policy."
+					}
+				},
+				"profiles": {
+					"title": "3. Minecraft Player Profiles",
+					"body": {
+						"0": "You may create, rename, or delete Minecraft player profiles under your account. Profile names, UUIDs, bound textures, and audit records are used for launcher login, server session verification, and public profile presentation.",
+						"1": "Profile names must not impersonate others, create confusion, violate community rules, or infringe third-party rights. Administrators may rename, freeze, or delete profiles for security, compliance, abuse handling, or dispute resolution; renames and deletion may invalidate related Yggdrasil tokens."
+					}
+				},
+				"textures": {
+					"title": "4. Texture Wardrobe and Uploaded Content",
+					"body": {
+						"0": "Skins, capes, avatars, or other image content you upload should be content you are allowed to use, and must satisfy this site's validation rules for file size, MIME type, PNG format, dimensions, model type, name, and tags.",
+						"1": "Do not upload content that is illegal, infringing, malicious, hateful, harassing, sexual, threatening, doxxing, misleadingly impersonating, or clearly harmful to the community experience.",
+						"2": "Textures may be private or public depending on your settings, bound profiles, public library status, and administrator actions. To let Minecraft clients, launchers, and servers read them correctly, bound or public texture URLs may be publicly accessible, previewed, cached, or copied."
+					}
+				},
+				"library": {
+					"title": "5. Public Texture Library, Review, and Reports",
+					"body": {
+						"0": "When you submit a texture to the public texture library, you allow this site to display that texture, its name, type, model, tags, hash, dimensions, uploader information, and previews, and to let other users copy it to their own wardrobe when the feature permits.",
+						"1": "Administrators may review, approve, reject, unpublish, reclassify, or adjust public texture library entries and tags according to site rules. Review notes, report reasons, handling results, and related actions may be stored in audit records.",
+						"2": "You may report violating public library content, but you must not report maliciously, harass repeatedly, fabricate evidence, or use the reporting workflow to attack other users. Administrators may accept or reject reports and retain handling records as needed."
+					}
+				},
+				"launcher": {
+					"title": "6. Launcher and Yggdrasil Protocol Access",
+					"body": {
+						"0": "This site's Yggdrasil endpoints, authlib-injector add-server URI, texture signatures, sessionserver lookups, join/hasJoined checks, and launcher upload endpoints are provided only for compatible Minecraft launchers, clients, servers, and related tools.",
+						"1": "Do not disclose access tokens, client tokens, browser sessions, passkeys, or other authentication material to others. Do not forge requests, replay tokens, bypass rate limits, scan private endpoints, or interfere with other players' login flow.",
+						"2": "Protocol compatibility may change with Minecraft, authlib-injector, or this site. Administrators may limit, pause, refresh, or invalidate sessions for security, maintenance, key rotation, profile changes, or abuse handling."
+					}
+				},
+				"security": {
+					"title": "7. Security and Prohibited Conduct",
+					"body": {
+						"0": "Do not attempt unauthorized access, privilege escalation, injection, brute force, denial of service, CSRF/CORS/rate-limit bypass, malformed file abuse, cache poisoning, token theft, non-public data scraping, or audit trail tampering.",
+						"1": "If you discover a vulnerability, contact an administrator promptly without expanding impact, accessing unrelated data, or publishing exploit details. Administrators may temporarily restrict accounts, IPs, endpoints, or related features while investigating risk."
+					}
+				},
+				"operations": {
+					"title": "8. Operations, Administration, and Availability",
+					"body": {
+						"0": "Administrators and authorized operators may manage users, invitations, external login providers, runtime configuration, CAPTCHA, mail, signing keys, the texture library, reports, background tasks, system information, and audit records within their granted permissions.",
+						"1": "The service may be temporarily unavailable during upgrades, incidents, migrations, backups, third-party outages, configuration errors, or security events. Administrators should reduce impact where practical, but uninterrupted, error-free, or universal client compatibility is not guaranteed.",
+						"2": "To the extent permitted by law, the site is provided as is. Losses caused by your violation of these terms, use of untrusted clients, credential disclosure, prohibited uploads, or reliance on unstable interfaces are your responsibility."
+					}
+				},
+				"changes": {
+					"title": "9. Changes to These Terms",
+					"body": {
+						"0": "Administrators may update these terms as features, deployment environments, community rules, security requirements, or legal requirements change. Material changes should be announced through the site interface, notices, or community channels.",
+						"1": "If you do not agree with updated terms, stop using the site and contact an administrator about your account, player profiles, textures, public library entries, or other related data."
+					}
+				},
+				"contact": {
+					"title": "10. Contact and Disputes",
+					"body": {
+						"0": "Questions about accounts, texture rights, report handling, data requests, or security issues should be directed to this site's administrators with enough information to locate the issue, such as account name, profile UUID, texture ID, report ID, or time of occurrence.",
+						"1": "These terms are site service rules and are not legal advice. If the administrators publish more specific community rules, server rules, or compliance notices, those rules should be read together with these terms."
+					}
+				}
+			}
+		},
+		"privacy": {
+			"pageTitle": "Privacy Policy",
+			"badge": "Data notice",
+			"heading": "Privacy Policy",
+			"lead": "This policy explains what data this site handles for account login, Minecraft player profiles, texture hosting, the public texture library, report review, and Yggdrasil protocol compatibility.",
+			"sections": {
+				"collected": {
+					"title": "1. Data We Process",
+					"body": {
+						"0": "This site may store usernames, email addresses, email verification status, password hashes, roles, operator scopes, avatars, language preferences, account status, invitation records, and security settings.",
+						"1": "This site may store Minecraft player profile names, UUIDs, profile ownership, skin and cape bindings, texture files, texture names, types, models, hashes, dimensions, MIME types, tags, visibility, public library status, review notes, report reasons, and report handling records.",
+						"2": "The server may also record IP addresses, user agents, request times, request paths, login sessions, necessary Yggdrasil token verification data, administration actions, error logs, background task state, mail delivery records, and audit events."
+					}
+				},
+				"auth": {
+					"title": "2. Authentication, Passkeys, and External Login",
+					"body": {
+						"0": "Browser login generally relies on secure cookies, CSRF tokens, and necessary local cache to maintain sessions, reduce repeated requests, and show recent user state. The site may also store session expiry time, device names, and token hashes.",
+						"1": "If you use passkeys or external login, this site stores the public credential identifiers, provider kind, external identity identifiers, link state, and last-use times needed to complete authentication. The site should not store raw biometric data or third-party account passwords."
+					}
+				},
+				"profilesTextures": {
+					"title": "3. Player Profile and Texture Data",
+					"body": {
+						"0": "Player profile and texture data is used so launchers, Minecraft clients, and servers can identify your character, read skins and capes, verify sessionserver responses, and display preview and management state in the workbench.",
+						"1": "Texture previews, avatar rendering, image validation, and public library display may produce derived images, cache entries, or statistics. Deletion, rename, or unpublishing actions may not immediately disappear from every client cache, browser cache, or reverse proxy cache."
+					}
+				},
+				"use": {
+					"title": "4. How Data Is Used",
+					"body": {
+						"0": "This data is used for account registration and login, invitation acceptance, password reset, email verification, passkey management, external login linking, launcher authentication, profile management, texture upload, texture delivery, public library review, report handling, permission control, notifications, security audit, and troubleshooting.",
+						"1": "Administrators should not use data for purposes unrelated to site identity, texture, authentication, community governance, and service operations unless you have consented, it is necessary to protect users or the service, or the law requires it."
+					}
+				},
+				"public": {
+					"title": "5. Publicly Visible Information",
+					"body": {
+						"0": "Player profile names, UUIDs, and bound skins or capes may be visible through Yggdrasil metadata, sessionserver responses, texture URLs, public read endpoints, launchers, Minecraft clients, and servers.",
+						"1": "Approved public texture library entries may show texture names, types, models, tags, previews, uploader public identifiers, creation times, and update times, and may be copied by other users into their own wardrobe.",
+						"2": "Do not upload texture content that you do not want other players, servers, launchers, browser caches, CDNs, reverse proxies, or search and archive tools to see."
+					}
+				},
+				"logs": {
+					"title": "6. Logs, Audit, and Background Tasks",
+					"body": {
+						"0": "This site records security and operational events such as login, logout, token refresh, password change, passkey operations, external login linking, profile changes, texture upload/bind/delete, public library submission/review/unpublishing, report submission/handling, configuration changes, mail delivery, and task retries.",
+						"1": "Audit records may include the actor, target object, time, action type, result, short details, and presentation metadata. Administrators use these records to troubleshoot issues, handle abuse, trace permissioned actions, and satisfy necessary compliance requirements."
+					}
+				},
+				"security": {
+					"title": "7. Security Protection",
+					"body": {
+						"0": "Passwords, Yggdrasil tokens, session secrets, client tokens, signing private keys, and other sensitive material should be stored only as hashes, encrypted values, or the minimum form required to run the service. Plain credentials should not be written to logs, audit records, or error messages.",
+						"1": "If you suspect your account, tokens, email address, passkey, or external login identity have been compromised, change your password, revoke other sessions, delete suspicious passkeys or external links, and contact a site administrator."
+					}
+				},
+				"sharing": {
+					"title": "8. Data Sharing and Third-Party Processing",
+					"body": {
+						"0": "This site does not actively sell your personal data. Databases, object storage, cache services, mail services, CAPTCHA components, reverse proxies, logging systems, backup systems, or hosting environments required to run the service may process necessary data.",
+						"1": "If you use external login, the relevant provider may process your login request, identity identifier, callback address, and authorization state under its own policies. This site only controls the data it stores and processes.",
+						"2": "When required for law, security incidents, abuse handling, rights complaints, community governance, or service migration, administrators may inspect, export, or provide relevant logs, account records, texture records, and report records."
+					}
+				},
+				"retention": {
+					"title": "9. Retention and Deletion",
+					"body": {
+						"0": "Accounts, player profiles, textures, public library entries, reports, audit records, mail records, and logs are retained according to site configuration, backup cycles, administrator policy, and applicable rules. Some security logs, audit records, backups, and caches may remain for a period after account, profile, or texture deletion.",
+						"1": "Because texture URLs, public library content, and Yggdrasil responses may be cached by clients, servers, browsers, or proxies, deletion or unpublishing does not guarantee that data already delivered to external environments becomes unavailable immediately."
+					}
+				},
+				"rights": {
+					"title": "10. Your Choices and Requests",
+					"body": {
+						"0": "You can manage account details, password, sessions, passkeys, external login links, player profiles, texture wardrobe, tags, and public library submissions in the workbench when the corresponding features are enabled by administrators.",
+						"1": "You may contact an administrator to request access, correction, export, deletion, or restriction of data related to your account. Administrators will handle requests according to identity verification, site capabilities, security requirements, backup limits, and applicable rules."
+					}
+				},
+				"contact": {
+					"title": "11. Contact and Policy Updates",
+					"body": {
+						"0": "For privacy, data deletion, security incidents, texture rights, or report handling questions, contact this site's administrators and provide an account, email address, profile UUID, texture ID, report ID, or relevant time range so the issue can be located.",
+						"1": "Administrators may update this policy as features, deployment environments, data processing methods, or legal requirements change. Continued use of the site means you have been informed of the updated data handling notice."
+					}
+				}
+			}
+		}
+	},
+	"errorPage": {
+		"notFoundTitle": "Sorry, page not found",
+		"genericTitle": "Page failed to load",
+		"notFoundDescription": "Looks like this path points outside the loaded world.",
+		"genericDescription": "The current view failed before it could render. You can return home or go back and try again.",
+		"backHome": "Back to home",
+		"backPrevious": "Go back",
+		"errorCode": "Error code:",
+		"supportPanel": "Error reasons and help",
+		"reasonTitle": "Possible reasons:",
+		"reasonAddress": "The address may be incorrect",
+		"reasonMoved": "The page may have moved or been deleted",
+		"reasonPermission": "You may not have permission to access this page",
+		"helpTitle": "Need help?",
+		"helpDescription": "If you think this is a mistake, include the error code when contacting the site administrator.",
+		"detailExpand": "Show error details",
+		"detailCollapse": "Hide error details"
+	},
+	"launcher": {
+		"title": "Launcher access",
+		"description": "Add this authentication server in your launcher, then sign in with your site account.",
+		"userTitle": "Add this site to your launcher",
+		"profileTitle": "Use a profile in your launcher",
+		"userDescription": "Add this authentication server in a launcher that supports authlib-injector, then sign in with your site account and choose your Minecraft profile.",
+		"protocolBadge": "Yggdrasil API external login",
+		"openProfiles": "Manage profiles",
+		"externalLoginName": "Choose external login in the launcher",
+		"externalLoginDescription": "Use your site account username or email and password.",
+		"apiRootHint": "If the launcher asks for an authentication server address, paste the displayed API Root.",
+		"selectProfile": "Choose your Minecraft profile after signing in",
+		"selectProfileName": "Choose the profile you want after signing in",
+		"selectProfileDescription": "Profiles, skins, and capes are resolved from this site.",
+		"profileHint": "Profiles and skins are managed here; the launcher only signs in and starts the game.",
+		"dragToLauncher": "Drag to launcher",
+		"dragHint": "Launchers that support drag-and-drop server setup will recognize this authlib-injector address.",
+		"serverOwnerTitle": "Minecraft server owner setup",
+		"serverOwnerDescription": "Place authlib-injector.jar in the server directory, add the JVM argument before -jar, and keep online-mode=true.",
+		"jvmArg": "JVM argument",
+		"serverCommand": "Server command example",
+		"secureProfileTitle": "Recommended for 1.19 and newer",
+		"secureProfileDescription": "authlib-injector v1.2.0 and newer should keep secure profile checks enabled. Keep these server.properties values, then use the same launch command.",
+		"connectionTitle": "Authentication server",
+		"connectionDescription": "Players only need this address when their launcher cannot import it by drag-and-drop.",
+		"domainsTitle": "Texture URLs",
+		"domainsDescription": "Skin and cape URLs are resolved automatically after launcher login."
+	},
+	"init": {
+		"title": "Finish initial setup",
+		"headline": "Finish Aster initial setup",
+		"description": "No administrator account exists yet. Create the first admin and set the public address people use to reach this site.",
+		"cardDescription": "This account becomes the first administrator. The public site URL is used to build launcher setup URLs and texture URLs.",
+		"publicSiteUrl": "Public site URL",
+		"publicSiteUrlHelp": "Enter the site root that players, launchers, and Minecraft clients can reach. Use only scheme and host, with an optional port, and no path.",
+		"publicSiteUrlRequired": "Enter the public site URL.",
+		"publicSiteUrlInvalid": "The public site URL is not valid.",
+		"publicSiteUrlProtocol": "The public site URL must use http or https.",
+		"publicSiteUrlOriginOnly": "The public site URL must be the site root without a path, query, or hash.",
+		"publicSiteUrlHttpWarning": "Use HTTPS for public deployments. HTTP is intended for localhost or private-network testing.",
+		"createAdmin": "Create admin",
+		"setupComplete": "Setup complete",
+		"footer": "{{name}} setup",
+		"featureAdminTitle": "First administrator",
+		"featureAdminDescription": "Manage runtime settings, profiles, textures, and audit records after setup.",
+		"featureUrlTitle": "One public URL",
+		"featureUrlDescription": "The site, Yggdrasil API, and texture URLs are derived from one public site URL.",
+		"featurePlayerTitle": "Client compatibility",
+		"featurePlayerDescription": "Texture domains include this site plus the official Minecraft and Mojang domains."
+	},
+	"login": {
+		"title": "Login",
+		"setupTitle": "Create first admin",
+		"registerTitle": "Create account",
+		"eyebrow": "authlib-injector compatible",
+		"welcomeTitle": "Welcome back.",
+		"welcomePrefix": "Welcome back. Sign in to your",
+		"welcomeSuffix": "account.",
+		"welcomeDescription": "Manage Minecraft profiles, skins, capes, launcher sessions, and account permissions from your workspace.",
+		"headline": "Manage Minecraft profiles and textures after signing in.",
+		"setupHeadline": "Initialize this Yggdrasil server before players sign in.",
+		"description": "Your account, character and skins in one place.",
+		"setupDescription": "No administrator account exists yet. Create the first admin account to finish setup.",
+		"cardDescription": "Use the same username and password as in the launcher.",
+		"setupCardDescription": "This account becomes the first administrator and can manage runtime config, profiles, textures, and audit records.",
+		"registerDescription": "Choose your Minecraft nickname carefully. It is permanent and cannot be changed.",
+		"registerHeadline": "Create an account.",
+		"registerHeroDescription": "Create an account and choose your in-game look.",
+		"identifier": "Email or username",
+		"username": "Username",
+		"minecraftNickname": "Minecraft nickname",
+		"email": "Email",
+		"password": "Password",
+		"captcha": "Visual verification",
+		"captchaImageAlt": "Visual verification code",
+		"captchaUnavailable": "Verification image failed to load. Refresh and try again.",
+		"refreshCaptcha": "Refresh verification",
+		"captchaPlaceholder": "Enter the characters shown",
+		"identifierPlaceholder": "Enter email or username",
+		"usernamePlaceholder": "4-16 characters: letters, numbers, underscores, and hyphens",
+		"minecraftNicknamePlaceholder": "4-16 characters: letters, numbers, and underscores",
+		"emailPlaceholder": "Enter a valid email address",
+		"passwordPlaceholder": "Enter password",
+		"confirmPassword": "Confirm password",
+		"confirmPasswordPlaceholder": "Enter password again",
+		"passwordMismatch": "Passwords do not match.",
+		"validationFailed": "Check the highlighted fields and try again.",
+		"validationIdentifierRequired": "Enter your email or username.",
+		"validationUsernameLength": "Username must be 4-16 characters.",
+		"validationUsernameChars": "Username may only contain letters, numbers, underscores, and hyphens.",
+		"validationMinecraftUsernameLength": "Minecraft nickname must be 4-16 characters.",
+		"validationMinecraftUsernameChars": "Minecraft nickname may only contain letters, numbers, and underscores.",
+		"validationEmailRequired": "Enter your email address.",
+		"validationEmailInvalid": "Enter a valid email address.",
+		"validationPasswordRequired": "Enter your password.",
+		"validationCaptchaRequired": "Enter the visual verification code.",
+		"validationPasswordLength": "Password must be 8-128 characters.",
+		"validationConfirmRequired": "Confirm your password.",
+		"validationAcceptTerms": "Confirm that this account is used for Aster authentication management.",
+		"passwordStrength": "Password strength",
+		"passwordStrengthWeak": "Weak",
+		"passwordStrengthMedium": "Medium",
+		"passwordStrengthStrong": "Strong",
+		"acceptTerms": "I understand this account is used for Aster profile, texture, and authentication management.",
+		"checking": "Checking initialization state",
+		"createAdmin": "Create admin",
+		"setupComplete": "Setup complete",
+		"loginSuccess": "Welcome back",
+		"registerSuccess": "Account and Minecraft profile created",
+		"registerActivationSent": "Account and Minecraft profile created. Check your email to activate the account.",
+		"activationSuccess": "Email verified. You can sign in now.",
+		"contactVerificationInvalid": "The verification link is invalid or has already been used.",
+		"contactVerificationExpired": "The verification link has expired. Request a new one.",
+		"contactVerificationMissing": "The verification link is missing its token.",
+		"forgotPassword": "Forgot password?",
+		"passwordResetRequestDescription": "Enter your account email and we will send a password reset message. To prevent account enumeration, the response does not reveal whether the account exists.",
+		"passwordResetRequestSubmit": "Send reset email",
+		"passwordResetRequestSubmitting": "Sending",
+		"passwordResetRequested": "If the email exists, a reset message will be sent to that address.",
+		"resetPasswordTitle": "Reset password",
+		"resetPasswordDescription": "Set a new sign-in password. Other active sessions will be invalidated.",
+		"resetPasswordSubmit": "Update password",
+		"resetPasswordSubmitting": "Updating",
+		"passwordResetSuccess": "Password reset. Sign in with your new password.",
+		"forcePasswordChangeEyebrow": "Security check",
+		"forcePasswordChangeTitle": "Password change required",
+		"forcePasswordChangeDescription": "An administrator requires you to change your sign-in password before continuing to the workbench. A normal session will be issued after it succeeds.",
+		"forcePasswordChangeSubmit": "Change password",
+		"forcePasswordChangeSuccess": "Password changed",
+		"currentPassword": "Current password",
+		"newPassword": "New password",
+		"validationPasswordSameAsCurrent": "New password cannot match the current password.",
+		"resetPasswordInvalidTitle": "Invalid reset link",
+		"resetPasswordInvalidDescription": "This link does not exist, has already been used, or is not a password reset link.",
+		"resetPasswordExpiredTitle": "Reset link expired",
+		"resetPasswordExpiredDescription": "This password reset link has expired. Request a new email.",
+		"requestNewResetLink": "Send a new reset email",
+		"backToLogin": "Back to login",
+		"language": "Language",
+		"languageRu": "Russian",
+		"languageZh": "Simplified Chinese",
+		"languageEn": "English",
+		"showPassword": "Show password",
+		"hidePassword": "Hide password",
+		"passkeyLogin": "Continue with passkey",
+		"passkeyUnsupported": "Passkeys are not supported by this browser.",
+		"passkeyCancelled": "Passkey verification was cancelled.",
+		"or": "or",
+		"externalLogin": "Continue with {{provider}}",
+		"externalAuthRecoveryTitle": "Confirm this external account",
+		"externalAuthRecoveryDescription": "This external identity's email cannot sign in directly yet. Link it with an existing site account password, or verify the email to finish creating or linking the account.",
+		"externalAuthPasswordTab": "Link existing account",
+		"externalAuthEmailTab": "Email verification",
+		"externalAuthPasswordSubmit": "Link and sign in",
+		"externalAuthPasswordLinking": "Linking",
+		"externalAuthPasswordLinked": "External account linked",
+		"externalAuthEmailSubmit": "Send verification email",
+		"externalAuthEmailSending": "Sending",
+		"externalAuthEmailSentTitle": "Verification email sent",
+		"externalAuthEmailSentHint": "Open the link in the email to finish verification. After it succeeds, you will return to the login flow.",
+		"externalAuthEmailSentToast": "Verification email sent",
+		"externalAuthEmailMissing": "External auth email verification link is missing its token.",
+		"externalAuthEmailInvalid": "External auth email verification link is invalid or has already been used.",
+		"externalAuthEmailExpired": "External auth email verification link expired. Start the external sign-in again.",
+		"externalAuthFailed": "External authentication failed. Start the sign-in again.",
+		"noAccount": "No account yet?",
+		"hasAccount": "Already have an account?",
+		"registerNow": "Register now",
+		"secureFooter": "{{name}} provides secure authentication.",
+		"protocolFooter": "One account for the website and launcher.",
+		"featureSecureTitle": "Secure authentication",
+		"featureSecureDescription": "Use site accounts with Yggdrasil-compatible launcher authentication.",
+		"featureProfileTitle": "Profile management",
+		"featureProfileDescription": "Upload your skin for the game.",
+		"featureAuditTitle": "Permission control",
+		"featureAuditDescription": "Admin actions and sensitive changes stay traceable through audit logs.",
+		"registerFeatureSecureTitle": "Secure account",
+		"registerFeatureSecureDescription": "Use Yggdrasil-compatible authentication to protect your account.",
+		"registerFeatureProfileTitle": "Profile ownership",
+		"registerFeatureProfileDescription": "One account, one character. Upload a skin to apply it immediately.",
+		"registerFeatureAuditTitle": "Access control",
+		"registerFeatureAuditDescription": "Permissions and security-sensitive changes are handled inside the workbench.",
+		"registerConsentHint": "Registration means your account joins this Aster authentication server."
+	},
+	"invite": {
+		"pageTitle": "Accept invitation",
+		"headline": "Accept your invitation and create a site account.",
+		"heroDescription": "Use this invitation link to join the Aster authentication server. After creating an account, you can manage profiles, textures, and account security from the workbench.",
+		"cardTitle": "Invitation",
+		"cardDescription": "{{email}} was invited to join this server. The invitation expires at {{expiresAt}}.",
+		"cardDescriptionEmail": "{{email}} was invited to join this server.",
+		"cardDescriptionExpiresAt": "The invitation expires at",
+		"loading": "Checking invitation",
+		"invalid": "Invitation token is missing.",
+		"accept": "Accept invitation",
+		"accepting": "Creating account...",
+		"accepted": "Account created",
+		"backToLogin": "Back to login"
+	}
+}

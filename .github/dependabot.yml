@@ -1,0 +1,99 @@
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Moscow
+    groups:
+      rust-compatible:
+        update-types: [patch, minor]
+    # API migrations are reviewed separately from compatible/security updates.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: argon2
+        versions: [">=0.6.0"]
+      - dependency-name: jsonwebtoken
+        update-types: ["version-update:semver-major"]
+      - dependency-name: utoipa
+        update-types: ["version-update:semver-major"]
+      - dependency-name: utoipa-swagger-ui
+        update-types: ["version-update:semver-major"]
+      - dependency-name: base64
+        versions: [">=0.23.0"]
+      - dependency-name: validator
+        versions: [">=0.21.0"]
+      - dependency-name: actix-multipart
+        versions: [">=0.8.0"]
+      - dependency-name: testcontainers
+        versions: [">=0.28.0"]
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: bun
+    directory: /frontend-panel
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:15"
+      timezone: Europe/Moscow
+    groups:
+      frontend-compatible:
+        update-types: [patch, minor]
+    # Keep the tested DOM/coverage stack together until a dedicated migration.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: vitest
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@vitest/coverage-v8"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: jsdom
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@testing-library/jest-dom"
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: bun
+    directory: /docs
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:30"
+      timezone: Europe/Moscow
+    groups:
+      docs-compatible:
+        update-types: [patch, minor]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: mermaid
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 10
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:45"
+      timezone: Europe/Moscow
+    groups:
+      github-actions:
+        patterns: ["*"]
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "07:00"
+      timezone: Europe/Moscow
+    # Node 24 is the supported build runtime; Node 26 requires its own migration.
+    ignore:
+      - dependency-name: node
+        update-types: ["version-update:semver-major"]
+    open-pull-requests-limit: 5

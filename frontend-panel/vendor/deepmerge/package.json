@@ -1,0 +1,7 @@
+{
+  "name": "@krwa/deepmerge",
+  "version": "4.3.1-krwa.1",
+  "private": true,
+  "license": "MIT",
+  "main": "index.cjs"
+}

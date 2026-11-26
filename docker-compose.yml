@@ -1,0 +1,24 @@
+services:
+  portal:
+    image: ${PORTAL_IMAGE:-ghcr.io/streletskiy/krwa-mc-portal:latest}
+    ports:
+      - "127.0.0.1:${PORTAL_PORT:-3000}:3000"
+    volumes:
+      - portal-data:/data
+    environment:
+      PORTAL_TITLE: ${PORTAL_TITLE:-}
+      PORTAL_DESCRIPTION: ${PORTAL_DESCRIPTION:-}
+      PORTAL_FAVICON_URL: ${PORTAL_FAVICON_URL:-}
+      PORTAL_WORDMARK_DARK_URL: ${PORTAL_WORDMARK_DARK_URL:-}
+      PORTAL_WORDMARK_LIGHT_URL: ${PORTAL_WORDMARK_LIGHT_URL:-}
+      PORTAL_HERO_URL: ${PORTAL_HERO_URL:-}
+      PORTAL_SOCIAL_IMAGE_URL: ${PORTAL_SOCIAL_IMAGE_URL:-}
+      PORTAL_DOWNLOAD_BASE: ${PORTAL_DOWNLOAD_BASE:-}
+      PORTAL_COMMUNITY_URL: ${PORTAL_COMMUNITY_URL:-}
+      PORTAL_WORLD_ADMIN_URL: ${PORTAL_WORLD_ADMIN_URL:-}
+      ASTER__AUTH__BOOTSTRAP_INSECURE_COOKIES: "${PORTAL_HTTP_COOKIES:-false}"
+    stop_grace_period: 45s
+    restart: unless-stopped
+
+volumes:
+  portal-data:
