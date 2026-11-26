@@ -29,6 +29,7 @@ mod m20260618_000007_texture_library_reports;
 mod m20260619_000001_cursor_pagination_indexes;
 mod m20260620_000001_yggdrasil_session_forward_servers;
 mod m20260620_000002_user_bans;
+mod m20261126_000001_launcher_devices;
 mod time;
 
 pub struct Migrator;
@@ -61,6 +62,7 @@ impl MigratorTrait for Migrator {
             Box::new(m20260619_000001_cursor_pagination_indexes::Migration),
             Box::new(m20260620_000001_yggdrasil_session_forward_servers::Migration),
             Box::new(m20260620_000002_user_bans::Migration),
+            Box::new(m20261126_000001_launcher_devices::Migration),
         ]
     }
 }

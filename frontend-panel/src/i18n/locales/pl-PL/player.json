@@ -236,5 +236,20 @@
 			"failed": "Błąd",
 			"preparing": "Przygotowanie"
 		}
+	},
+	"device": {
+		"title": "Logowanie do launchera",
+		"loading": "Sprawdzanie…",
+		"confirm": "Porównaj kod na launcherze i wybierz profil gry.",
+		"noProfile": "Najpierw utwórz profil gry na koncie.",
+		"expired": "Kod wygasł. Wygeneruj nowy kod QR.",
+		"error": "Nie udało się połączyć z portalem.",
+		"saving": "Zapisywanie…",
+		"approved": "Zatwierdzono. Wróć do launchera.",
+		"denied": "Odrzucono.",
+		"profile": "Profil",
+		"allow": "Zezwól",
+		"reject": "Odrzuć",
+		"retry": "Ponów"
 	}
 }

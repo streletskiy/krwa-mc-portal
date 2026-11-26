@@ -125,5 +125,20 @@
 			"failed": "Failed",
 			"preparing": "Preparing"
 		}
+	},
+	"device": {
+		"title": "Sign in to launcher",
+		"loading": "Checking request…",
+		"confirm": "Match the code on the launcher and choose a game profile.",
+		"noProfile": "Create a game profile in your account first.",
+		"expired": "This request expired. Open a new QR code in the launcher.",
+		"error": "Could not reach the portal.",
+		"saving": "Saving your choice…",
+		"approved": "Approved. Return to your launcher.",
+		"denied": "Sign-in rejected.",
+		"profile": "Profile",
+		"allow": "Approve sign-in",
+		"reject": "Reject",
+		"retry": "Retry"
 	}
 }

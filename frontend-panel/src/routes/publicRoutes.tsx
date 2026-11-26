@@ -5,6 +5,9 @@ import { publicPaths } from "@/routes/routePaths";
 import { publicElement } from "@/routes/routeSuspense";
 import { useAuthStore } from "@/stores/authStore";
 
+const DeviceLoginPage = lazyWithPreload(
+	() => import("@/pages/DeviceLoginPage"),
+);
 const PublicConnectPage = lazyWithPreload(
 	() => import("@/pages/PublicConnectPage"),
 );
@@ -23,6 +26,7 @@ function AdminLibrary({ children }: { children: ReactNode }) {
 }
 
 export const publicRoutes = [
+	{ path: publicPaths.device, element: publicElement(<DeviceLoginPage />) },
 	{
 		path: publicPaths.home,
 		element: publicElement(<PublicConnectPage />),

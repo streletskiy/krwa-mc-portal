@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { pendingDevice } from "@/lib/deviceLogin";
 import { AuthRouteFallback } from "@/router/RouteFallback";
 import { RouteAccessState } from "@/routes/guards/RouteAccessState";
 import { accountPaths } from "@/routes/routePaths";
@@ -20,6 +21,8 @@ export function GuestOnlyGate() {
 	}, [hydrate, isAuthenticated, isAuthStale]);
 
 	if (isAuthenticated) {
+		if (pendingDevice() && !mustChangePassword)
+			return <Navigate to={pendingDevice()} replace />;
 		return (
 			<RouteAccessState
 				actionHref={

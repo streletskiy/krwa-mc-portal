@@ -1,4 +1,5 @@
 export const publicPaths = {
+	device: "/device",
 	home: "/",
 	login: "/login",
 	register: "/register",

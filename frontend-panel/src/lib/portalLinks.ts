@@ -9,6 +9,12 @@ export function portalUrl(key: PortalSetting, fallback = "") {
 		.querySelector<HTMLMetaElement>(`meta[name="portal-${key}"]`)
 		?.content.trim();
 	if (!value || value.startsWith("%PORTAL_")) return fallback;
+	if (
+		key === "world-admin-url" &&
+		(value === "/admin/offline-worlds" ||
+			value === location.origin + "/admin/offline-worlds")
+	)
+		return "/admin/worlds";
 	if (/^\/(?!\/)/.test(value) && !value.includes("\\")) return value;
 	try {
 		const url = new URL(value);

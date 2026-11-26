@@ -1,4 +1,6 @@
+import { useTranslation } from "react-i18next";
 import type { RouteObject } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { lazyWithPreload } from "@/lib/lazyWithPreload";
 import { AdminOnlyGate } from "@/routes/guards/AdminOnlyGate";
@@ -50,6 +52,22 @@ const AdminUserDetailPage = lazyWithPreload(
 	() => import("@/pages/admin/AdminUserDetailPage"),
 );
 
+function WorldAdminPage() {
+	const { t } = useTranslation();
+	const [params] = useSearchParams();
+	const selection = new URLSearchParams();
+	for (const key of ["player", "trip"]) {
+		const id = params.get(key);
+		if (id && /^[0-9a-f]{32}$/.test(id)) selection.set(key, id);
+	}
+	return (
+		<iframe
+			className="block h-[calc(100dvh-5rem)] min-h-96 w-full border-0"
+			title={t("admin.overview.quick.offlineWorlds")}
+			src={"/api/offline-worlds/workspace?" + selection}
+		/>
+	);
+}
 export const adminRoutes = [
 	{
 		element: <AdminOnlyGate />,
@@ -57,6 +75,7 @@ export const adminRoutes = [
 			{
 				element: <AdminWorkspace />,
 				children: [
+					{ path: "/admin/worlds", element: <WorldAdminPage /> },
 					{
 						path: adminPaths.overview,
 						element: <AdminOverviewPage />,

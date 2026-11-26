@@ -10,7 +10,7 @@ mod properties;
 mod session;
 mod token;
 
-pub use auth::{authenticate, invalidate, refresh, signout, validate};
+pub use auth::{authenticate, device_session, invalidate, refresh, signout, validate};
 pub use error::{YggdrasilError, YggdrasilErrorKind};
 pub use metadata::metadata;
 pub use minecraft_services::{

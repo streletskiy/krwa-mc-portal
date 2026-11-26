@@ -8,6 +8,7 @@ pub mod external_auth_email_verification_flow;
 pub mod external_auth_identity;
 pub mod external_auth_login_flow;
 pub mod external_auth_provider;
+pub mod launcher_device;
 pub mod mail_outbox;
 pub mod minecraft_profile;
 pub mod minecraft_profile_texture;

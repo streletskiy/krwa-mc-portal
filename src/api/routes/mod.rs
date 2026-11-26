@@ -6,6 +6,7 @@ pub mod auth;
 pub mod auth_external_auth;
 pub mod frontend;
 pub mod health;
+pub mod launcher_device;
 pub(crate) mod player_policy;
 pub mod profiles;
 pub mod public;
@@ -21,6 +22,7 @@ pub fn configure_api(cfg: &mut web::ServiceConfig) {
         .configure(auth_external_auth::configure)
         .configure(auth::configure)
         .configure(account::configure)
+        .configure(launcher_device::configure)
         .configure(profiles::configure)
         .configure(wardrobe::configure)
         .configure(texture_library::configure)

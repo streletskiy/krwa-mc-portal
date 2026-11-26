@@ -21,6 +21,7 @@ import {
 	clearContactVerificationRedirectSearch,
 	getContactVerificationRedirectState,
 } from "@/lib/contactVerificationRedirect";
+import { pendingDevice } from "@/lib/deviceLogin";
 import {
 	clearPasswordResetRedirectSearch,
 	getPasswordResetRedirectState,
@@ -359,6 +360,10 @@ function useLoginPageController() {
 	const worldReturn = worldLoginReturn();
 	function finishLogin() {
 		const current = useAuthStore.getState().user;
+		if (pendingDevice() && !current?.must_change_password) {
+			navigate(pendingDevice(), { replace: true });
+			return;
+		}
 		if (
 			worldReturn &&
 			current?.role === "admin" &&
@@ -645,7 +650,7 @@ function useLoginPageController() {
 				provider.kind,
 				provider.key,
 				{
-					return_path: worldReturn || accountPaths.home,
+					return_path: pendingDevice() || worldReturn || accountPaths.home,
 				},
 			);
 			window.location.assign(response.authorization_url);

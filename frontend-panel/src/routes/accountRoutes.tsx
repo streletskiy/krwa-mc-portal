@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
-import type { RouteObject } from "react-router-dom";
+import { Navigate, type RouteObject } from "react-router-dom";
 import { PlayerShell } from "@/components/player/PlayerShell";
+import { pendingDevice } from "@/lib/deviceLogin";
 import { lazyWithPreload } from "@/lib/lazyWithPreload";
 import { accountPaths } from "@/routes/routePaths";
 import { useAuthStore } from "@/stores/authStore";
@@ -50,11 +51,15 @@ function AccountWardrobe() {
 		</section>
 	);
 }
+function AccountHome() {
+	const pending = pendingDevice();
+	return pending ? <Navigate to={pending} replace /> : <AccountOverviewPage />;
+}
 export const accountRoutes = [
 	{
 		element: <PlayerShell />,
 		children: [
-			{ path: accountPaths.home, element: <AccountOverviewPage /> },
+			{ path: accountPaths.home, element: <AccountHome /> },
 			{ path: accountPaths.profiles, element: <AccountProfiles /> },
 			{ path: accountPaths.wardrobe, element: <AccountWardrobe /> },
 			{ path: accountPaths.audit, element: <AccountAuditPage /> },

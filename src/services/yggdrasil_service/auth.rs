@@ -168,6 +168,69 @@ where
     })
 }
 
+pub async fn device_session<S: DatabaseRuntimeState + RuntimeConfigRuntimeState>(
+    state: &S,
+    user_id: i64,
+    profile_uuid: &str,
+    client_token: String,
+    req: &HttpRequest,
+) -> std::result::Result<YggdrasilAuthenticateResp, YggdrasilError> {
+    let user = user_repo::find_by_id(state.writer_db(), user_id)
+        .await
+        .map_err(YggdrasilError::from)?;
+    if !user.status.is_active()
+        || user.must_change_password
+        || user.email_verified_at.is_none()
+        || ban_service::is_user_banned(state, user_id, UserBanScope::YggdrasilAccess)
+            .await
+            .map_err(YggdrasilError::from)?
+    {
+        return Err(YggdrasilError::new(YggdrasilErrorKind::InvalidCredentials));
+    }
+    let profiles = minecraft_profile_repo::list_by_user(state.writer_db(), user_id)
+        .await
+        .map_err(YggdrasilError::from)?;
+    let profile = profiles
+        .iter()
+        .find(|p| p.uuid == profile_uuid)
+        .ok_or_else(|| YggdrasilError::new(YggdrasilErrorKind::InvalidCredentials))?;
+    let policy = RuntimeYggdrasilPolicy::from_runtime_config(state.runtime_config());
+    let issued = issue_token(
+        state,
+        user_id,
+        &client_token,
+        Some(profile.id),
+        &policy,
+        req,
+    )
+    .await?;
+    let ctx = audit_service::AuditContext::from_request(req, user_id);
+    audit_service::log_with_details(
+        state,
+        &ctx,
+        audit_service::AuditAction::YggdrasilAuthenticate,
+        audit_service::AuditEntityType::YggdrasilToken,
+        Some(issued.token_id),
+        Some(&profile.name),
+        || {
+            audit_service::details(audit_service::YggdrasilAuthenticateAuditDetails {
+                identifier: "device",
+                selected_profile_uuid: Some(&profile.uuid),
+                selected_profile_name: Some(&profile.name),
+                available_profile_count: profiles.len(),
+            })
+        },
+    )
+    .await;
+    Ok(YggdrasilAuthenticateResp {
+        access_token: issued.access_token,
+        client_token,
+        available_profiles: vec![profile_summary(profile)],
+        selected_profile: Some(profile_summary(profile)),
+        user: None,
+    })
+}
+
 pub async fn refresh<S>(
     state: &S,
     body: YggdrasilRefreshReq,

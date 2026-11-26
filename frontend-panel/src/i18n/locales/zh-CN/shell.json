@@ -91,5 +91,20 @@
 		"description": "自建 Minecraft 身份、角色档案与材质管理。",
 		"navigation": "导航",
 		"copyright": "© {{year}} {{name}}。保留所有权利。"
+	},
+	"device": {
+		"title": "启动器登录",
+		"loading": "正在检查…",
+		"confirm": "核对启动器上的代码，然后选择游戏档案。",
+		"noProfile": "请先创建游戏档案。",
+		"expired": "请求已过期，请生成新的二维码。",
+		"error": "连接失败。",
+		"saving": "正在保存…",
+		"approved": "已批准，请返回启动器。",
+		"denied": "已拒绝登录。",
+		"profile": "档案",
+		"allow": "批准登录",
+		"reject": "拒绝",
+		"retry": "重试"
 	}
 }

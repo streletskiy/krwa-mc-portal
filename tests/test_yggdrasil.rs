@@ -9180,3 +9180,57 @@ fn verify_property_signature(public_key_pem: &str, value: &str, signature: &str)
 fn extend_ascii(target: &mut Vec<u8>, value: &str) {
     target.extend_from_slice(value.as_bytes());
 }
+
+#[actix_web::test]
+async fn launcher_pairing_requires_login_and_consumes_only_once() {
+    let state = setup_yggdrasil().await;
+    let app = create_test_app!(state.clone());
+    let access = setup_admin!(app);
+    let profile = create_profile!(app, &access, "PairedPlayer");
+    let start = test::TestRequest::post()
+        .uri("/api/v1/launcher-device/start")
+        .set_json(serde_json::json!({"client_token":"device-test"}))
+        .to_request();
+    let grant: Value = test::call_and_read_body_json(&app, start).await;
+    let code = grant["code"].as_str().unwrap();
+    let route = format!("/api/v1/launcher-device/confirm/{code}");
+    let guest = test::call_service(&app, test::TestRequest::get().uri(&route).to_request()).await;
+    assert_eq!(guest.status(), 401);
+    let info: Value = test::call_and_read_body_json(
+        &app,
+        test::TestRequest::get()
+            .uri(&route)
+            .insert_header(common::bearer_header(&access))
+            .to_request(),
+    )
+    .await;
+    assert_eq!(info["profiles"][0]["id"], profile);
+    let poll = || {
+        test::TestRequest::post()
+            .uri("/api/v1/launcher-device/poll")
+            .set_json(serde_json::json!({"code":code,"secret":grant["secret"]}))
+            .to_request()
+    };
+    assert_eq!(test::call_service(&app, poll()).await.status(), 202);
+    let approved = test::TestRequest::post()
+        .uri("/api/v1/launcher-device/decision")
+        .insert_header(common::bearer_header(&access))
+        .set_json(serde_json::json!({"code":code,"profile":profile}))
+        .to_request();
+    assert_eq!(test::call_service(&app, approved).await.status(), 204);
+    let wrong = test::TestRequest::post()
+        .uri("/api/v1/launcher-device/poll")
+        .set_json(serde_json::json!({"code":code,"secret":code}))
+        .to_request();
+    assert_eq!(test::call_service(&app, wrong).await.status(), 410);
+    let issued: Value = test::call_and_read_body_json(&app, poll()).await;
+    assert_eq!(issued["selectedProfile"]["name"], "PairedPlayer");
+    assert_eq!(test::call_service(&app, poll()).await.status(), 410);
+    let validate = test::TestRequest::post()
+        .uri("/api/yggdrasil/authserver/validate")
+        .set_json(
+            serde_json::json!({"accessToken":issued["accessToken"],"clientToken":"device-test"}),
+        )
+        .to_request();
+    assert_eq!(test::call_service(&app, validate).await.status(), 204);
+}

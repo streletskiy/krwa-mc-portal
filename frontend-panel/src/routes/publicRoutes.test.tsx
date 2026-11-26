@@ -138,6 +138,7 @@ describe("fixed public routes", () => {
 
 	it("keeps the fixed public route paths explicit", () => {
 		expect(publicRoutes.map((route) => route.path)).toEqual([
+			publicPaths.device,
 			publicPaths.home,
 			publicPaths.textureLibrary,
 			publicPaths.textureLibraryDetail,
