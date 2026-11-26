@@ -118,14 +118,13 @@ async fn decide(
     if user.must_change_password || !valid(&body.code) {
         return Ok(HttpResponse::Forbidden().finish());
     }
-    if let Some(profile) = &body.profile {
-        if !minecraft_profile_repo::list_by_user(state.writer_db(), user.id)
+    if let Some(profile) = &body.profile
+        && !minecraft_profile_repo::list_by_user(state.writer_db(), user.id)
             .await?
             .iter()
             .any(|p| &p.uuid == profile)
-        {
-            return Ok(HttpResponse::Forbidden().finish());
-        }
+    {
+        return Ok(HttpResponse::Forbidden().finish());
     }
     let rows = Entity::update_many()
         .col_expr(Column::UserId, Expr::value(user.id))
