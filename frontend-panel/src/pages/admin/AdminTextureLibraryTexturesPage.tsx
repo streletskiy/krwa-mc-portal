@@ -1222,7 +1222,7 @@ function AdminTextureDetailContent({
 						</div>
 					</AdminSurface>
 
-					<aside className="grid min-w-0 max-w-full gap-3 xl:sticky xl:top-20 xl:self-start">
+					<aside className="grid min-w-0 max-w-full grid-cols-1 gap-3 xl:sticky xl:top-20 xl:self-start">
 						<MinecraftPreviewPanel
 							label={t("admin.textureLibraryDetailPage.preview")}
 							playerName={textureDisplayName(texture)}
