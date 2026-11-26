@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import type { OperatorScope } from "@/types/api";
 
 export function ShellSidebar({
+	adminWorkspace = false,
 	branding,
 	desktopCollapsed,
 	isAdmin,
@@ -25,6 +26,7 @@ export function ShellSidebar({
 	mobileOpen,
 	onMobileClose,
 }: {
+	adminWorkspace?: boolean;
 	branding: AppliedBranding;
 	desktopCollapsed: boolean;
 	isAdmin: boolean;
@@ -35,6 +37,7 @@ export function ShellSidebar({
 }) {
 	const { t } = useTranslation();
 	const navSections = getShellNavSections({
+		adminWorkspace,
 		isAdmin,
 		operatorScopes,
 		textureLibraryEnabled,
@@ -223,6 +226,7 @@ export function ShellSidebarNavLink({
 	const link = (
 		<NavLink
 			to={item.to}
+			reloadDocument={item.reloadDocument}
 			end={item.end}
 			aria-label={label}
 			onFocus={() => {

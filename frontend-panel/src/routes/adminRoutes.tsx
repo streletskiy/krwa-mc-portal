@@ -1,9 +1,12 @@
 import type { RouteObject } from "react-router-dom";
-import { AppShell } from "@/components/shell/AppShell";
+
 import { lazyWithPreload } from "@/lib/lazyWithPreload";
 import { AdminOnlyGate } from "@/routes/guards/AdminOnlyGate";
 import { adminPaths } from "@/routes/routePaths";
 
+const AdminWorkspace = lazyWithPreload(
+	() => import("@/components/admin/AdminWorkspace"),
+);
 const AdminSettingsPage = lazyWithPreload(
 	() => import("@/pages/admin/AdminSettingsPage"),
 );
@@ -52,7 +55,7 @@ export const adminRoutes = [
 		element: <AdminOnlyGate />,
 		children: [
 			{
-				element: <AppShell scope="admin" />,
+				element: <AdminWorkspace />,
 				children: [
 					{
 						path: adminPaths.overview,

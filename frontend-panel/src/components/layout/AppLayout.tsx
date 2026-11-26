@@ -142,6 +142,7 @@ export function AppLayout({ scope }: { scope?: ShellScope }) {
 		>
 			<div className="min-h-dvh lg:flex">
 				<ShellSidebar
+					adminWorkspace={isAdminScope}
 					branding={branding}
 					desktopCollapsed={!desktopSidebarExpanded}
 					isAdmin={isAdmin}

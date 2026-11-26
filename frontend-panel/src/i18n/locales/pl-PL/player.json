@@ -202,5 +202,39 @@
 		"previewBack": "Tył",
 		"previewRotate": "Obróć",
 		"previewReset": "Resetuj widok"
+	},
+	"workspace": {
+		"inbox": "Wymaga decyzji",
+		"findPlayer": "Znajdź gracza",
+		"playerWorlds": "Dostęp do światów i wyprawy",
+		"nickname": "Szukaj po nazwie",
+		"clear": "Brak oczekujących zgłoszeń.",
+		"noTrips": "Brak profili Minecraft i wypraw.",
+		"worldError": "Usługa światów jest niedostępna.",
+		"searchError": "Wyszukiwanie jest niedostępne.",
+		"noPlayers": "Nie znaleziono graczy.",
+		"trip": "Wyprawa",
+		"access": "Dostęp do świata",
+		"world": "Cały świat",
+		"parcel": "Działka 80 × 80",
+		"settingsSearch": "Szukaj ustawienia we wszystkich kategoriach",
+		"appearance": "Wygląd",
+		"debian": "Pakiet dla Debian / Ubuntu",
+		"operations": "Operacje",
+		"system": "System",
+		"states": {
+			"review": "Sprawdź konflikt",
+			"pending": "Rozpatrz prośbę",
+			"allowed": "Dozwolony",
+			"denied": "Odmowa",
+			"none": "Brak prośby",
+			"done": "Zastosowano",
+			"ready": "Gotowa",
+			"submitted": "Wysłana",
+			"approved": "Zaakceptowana",
+			"closed": "Zamknięta",
+			"failed": "Błąd",
+			"preparing": "Przygotowanie"
+		}
 	}
 }

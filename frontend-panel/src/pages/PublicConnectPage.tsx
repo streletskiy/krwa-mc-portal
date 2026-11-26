@@ -47,14 +47,10 @@ export default function PublicConnectPage() {
 								</a>
 								<a className="player-platform" href={`${downloads}/linux`}>
 									<Icon name="Download" className="size-5" />
-									<strong>Linux</strong>
-									<span>AppImage · x64</span>
+									<strong>Linux · AppImage</strong>
+									<span>x64</span>
 								</a>
-								<a className="player-platform" href={`${downloads}/linux-deb`}>
-									<Icon name="Download" className="size-5" />
-									<strong>Linux</strong>
-									<span>DEB · Debian/Ubuntu x64</span>
-								</a>
+
 								<a className="player-platform" href={`${downloads}/linux-arch`}>
 									<Icon name="Download" className="size-5" />
 									<strong>Steam Deck / Arch Linux</strong>
@@ -66,6 +62,14 @@ export default function PublicConnectPage() {
 									<span>Intel + Apple Silicon</span>
 								</a>
 							</div>
+							<details className="player-other-downloads">
+								<summary>{t("workspace.debian")}</summary>{" "}
+								<a className="player-platform" href={`${downloads}/linux-deb`}>
+									<Icon name="Download" className="size-5" />
+									<strong>Debian / Ubuntu</strong>
+									<span>DEB · Debian/Ubuntu x64</span>
+								</a>
+							</details>
 							<p className="player-download-hint">
 								{t("player.steamDeckHint")}
 							</p>

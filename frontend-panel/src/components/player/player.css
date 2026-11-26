@@ -441,9 +441,18 @@
 	}
 	.player-header {
 		height: 76px;
+		gap: 8px;
+	}
+	.player-brand {
+		min-width: 0;
+		gap: 6px;
 	}
 	.player-brand img {
 		width: 78px;
+		max-width: 100%;
+	}
+	.player-brand img.portal-icon {
+		width: 36px;
 	}
 	.player-hero {
 		grid-template-columns: 1fr;

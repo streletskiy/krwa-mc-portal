@@ -287,7 +287,7 @@ export function LegalPage({ kind }: { kind: LegalPageKind }) {
 			}
 			footer={<AppFooter />}
 		>
-			<main className="relative z-10 mx-auto grid w-full max-w-[92rem] gap-8 px-4 pt-8 pb-14 sm:px-8 lg:grid-cols-[20rem_minmax(0,1fr)] lg:px-12 lg:pt-14">
+			<main className="relative z-10 mx-auto grid w-full max-w-[92rem] grid-cols-1 gap-8 px-4 pt-8 pb-14 wrap-anywhere sm:px-8 lg:grid-cols-[20rem_minmax(0,1fr)] lg:px-12 lg:pt-14">
 				<aside className="lg:sticky lg:top-8 lg:self-start">
 					<div className="rounded-lg border border-black/10 bg-white/70 p-5 shadow-xl shadow-black/10 backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.07] dark:shadow-black/24">
 						<Badge className="rounded-full border-emerald-700/20 bg-emerald-600/12 px-3 py-1 text-emerald-800 dark:border-emerald-300/24 dark:bg-emerald-400/14 dark:text-emerald-100">

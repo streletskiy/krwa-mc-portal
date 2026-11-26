@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import "@/i18n";
+import { AdminDataProvider } from "@/components/admin/AdminWorkspace";
 import AdminOverviewPage from "@/pages/admin/AdminOverviewPage";
 import { adminOverviewService } from "@/services/adminService";
 import { useAuthStore } from "@/stores/authStore";
@@ -219,7 +220,9 @@ function renderPage() {
 
 	return render(
 		<MemoryRouter>
-			<AdminOverviewPage />
+			<AdminDataProvider>
+				<AdminOverviewPage />
+			</AdminDataProvider>
 		</MemoryRouter>,
 	);
 }

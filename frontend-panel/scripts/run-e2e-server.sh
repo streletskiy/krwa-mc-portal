@@ -24,6 +24,7 @@ printf '[e2e] runtime dir: %s\n' "$RUNTIME_DIR"
 printf '[e2e] serving AsterYggdrasil at http://127.0.0.1:%s\n' "$PORT"
 
 export PORTAL_DOWNLOAD_BASE=/download
+export PORTAL_WORLD_ADMIN_URL=/admin/offline-worlds
 export ASTER__SERVER__HOST=127.0.0.1
 export ASTER__SERVER__PORT="$PORT"
 export ASTER__AUTH__BOOTSTRAP_INSECURE_COOKIES=true

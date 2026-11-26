@@ -1,4 +1,9 @@
-import type { ComponentProps, ReactNode } from "react";
+import {
+	type ComponentProps,
+	type ReactNode,
+	useLayoutEffect,
+	useRef,
+} from "react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -48,7 +53,42 @@ export function AdminTable({
 	className,
 	...props
 }: ComponentProps<typeof Table>) {
-	return <Table className={cn("text-sm", className)} {...props} />;
+	const ref = useRef<HTMLTableElement>(null);
+	// Row cards reuse the live column headings, including translations and sortable columns.
+	useLayoutEffect(() => {
+		const table = ref.current;
+		if (!table) return;
+		function updateLabels() {
+			if (!table) return;
+			const headers = Array.from(table.tHead?.rows[0]?.cells ?? [], (cell) =>
+				cell.textContent.trim(),
+			);
+			for (const body of table.tBodies) {
+				for (const row of body.rows) {
+					for (const cell of row.cells) {
+						const label = headers[cell.cellIndex] ?? "";
+						if (cell.colSpan === 1 && label) cell.dataset.columnLabel = label;
+						else delete cell.dataset.columnLabel;
+					}
+				}
+			}
+		}
+		updateLabels();
+		const observer = new MutationObserver(updateLabels);
+		observer.observe(table, {
+			childList: true,
+			subtree: true,
+			characterData: true,
+		});
+		return () => observer.disconnect();
+	}, []);
+	return (
+		<Table
+			ref={ref}
+			className={cn("responsive-records text-sm", className)}
+			{...props}
+		/>
+	);
 }
 
 export function AdminTableHeader({

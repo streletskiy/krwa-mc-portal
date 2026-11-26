@@ -36,9 +36,8 @@ export function AuthUserMenu({
 		user.role === "operator"
 			? firstAdminPathForScopes(user.operator_scopes ?? [])
 			: null;
-	const adminEntryPath = isAdmin ? adminPaths.settings : firstOperatorAdminPath;
+	const adminEntryPath = isAdmin ? adminPaths.overview : firstOperatorAdminPath;
 	const isAdminScope = scope === "admin";
-	const isAppScope = scope !== "public";
 
 	return (
 		<DropdownMenu>
@@ -95,45 +94,40 @@ export function AuthUserMenu({
 						</div>
 					</div>
 				</div>
-				{scope === "public" ? (
-					<div className="mt-2 grid gap-1">
+				<div className="mt-2 grid gap-1">
+					<DropdownMenuItem
+						render={
+							<Link
+								to={scope === "public" ? accountPaths.home : publicPaths.home}
+							/>
+						}
+						className="flex min-h-9 items-center gap-2 rounded-md px-3 py-2 text-sm text-popover-foreground transition-colors hover:bg-accent focus:bg-accent"
+					>
+						<Icon
+							name={scope === "public" ? "Gauge" : "House"}
+							className="size-4 text-muted-foreground"
+						/>
+						{t(scope === "public" ? "nav.account" : "common.backToHome")}
+					</DropdownMenuItem>
+					{!isAdminScope && adminEntryPath ? (
 						<DropdownMenuItem
-							render={<Link to={accountPaths.home} />}
+							render={<Link to={adminEntryPath} />}
 							className="flex min-h-9 items-center gap-2 rounded-md px-3 py-2 text-sm text-popover-foreground transition-colors hover:bg-accent focus:bg-accent"
 						>
-							<Icon name="Gauge" className="size-4 text-muted-foreground" />
-							{t("nav.account")}
+							<Icon name="Shield" className="size-4 text-muted-foreground" />
+							{t("nav.admin")}
 						</DropdownMenuItem>
-						{adminEntryPath ? (
-							<DropdownMenuItem
-								render={<Link to={adminEntryPath} />}
-								className="flex min-h-9 items-center gap-2 rounded-md px-3 py-2 text-sm text-popover-foreground transition-colors hover:bg-accent focus:bg-accent"
-							>
-								<Icon name="Shield" className="size-4 text-muted-foreground" />
-								{t("nav.admin")}
-							</DropdownMenuItem>
-						) : null}
-					</div>
-				) : isAppScope ? (
-					<div className="mt-2 grid gap-1">
+					) : null}
+					{isAdminScope ? (
 						<DropdownMenuItem
-							render={<Link to={publicPaths.home} />}
+							render={<Link to={accountPaths.settings} />}
 							className="flex min-h-9 items-center gap-2 rounded-md px-3 py-2 text-sm text-popover-foreground transition-colors hover:bg-accent focus:bg-accent"
 						>
-							<Icon name="House" className="size-4 text-muted-foreground" />
-							{t("common.backToHome")}
+							<Icon name="Gear" className="size-4 text-muted-foreground" />
+							{t("nav.personalSettings")}
 						</DropdownMenuItem>
-						{isAdminScope ? (
-							<DropdownMenuItem
-								render={<Link to={accountPaths.settings} />}
-								className="flex min-h-9 items-center gap-2 rounded-md px-3 py-2 text-sm text-popover-foreground transition-colors hover:bg-accent focus:bg-accent"
-							>
-								<Icon name="Gear" className="size-4 text-muted-foreground" />
-								{t("nav.personalSettings")}
-							</DropdownMenuItem>
-						) : null}
-					</div>
-				) : null}
+					) : null}
+				</div>
 				<DropdownMenuItem
 					render={<button type="button" />}
 					variant="destructive"

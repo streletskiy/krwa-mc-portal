@@ -946,34 +946,6 @@ export default function AccountSettingsPage() {
 		);
 	}
 
-	if (user.role !== "admin")
-		return (
-			<section className="py-8 sm:py-12">
-				<h1 className="text-3xl font-semibold">{t("player.security")}</h1>
-				<div className="mt-3 break-words text-muted-foreground">
-					<p>{user.username}</p>
-					<p>{user.email}</p>
-				</div>
-				<PasswordSettings />
-				<details className="mt-8 max-w-2xl border-t border-border pt-5">
-					<summary className="cursor-pointer font-medium">
-						{t("simplePlayer.emailSettings")}
-					</summary>
-					<div className="mt-4">
-						<EmailChangeSection user={user} />
-					</div>
-				</details>
-				<details className="mt-6 max-w-2xl border-t border-border pt-5">
-					<summary className="cursor-pointer font-medium">
-						{t("simplePlayer.devices")}
-					</summary>
-					<div className="mt-4">
-						<LoginDevicesSection />
-					</div>
-				</details>
-			</section>
-		);
-
 	const profileName = displayNameForUser(user);
 	const avatarSource = user.profile?.avatar.source ?? "none";
 	const statusLabel =

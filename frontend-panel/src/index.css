@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @import "tw-animate-css";
 @import "./styles/shadcn.css";
+@import "./styles/workspaces.css";
 @import "@fontsource-variable/geist";
 @plugin "@tailwindcss/typography";
 @source ".";

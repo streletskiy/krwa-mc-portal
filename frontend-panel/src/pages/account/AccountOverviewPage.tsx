@@ -22,12 +22,24 @@ export default function AccountOverviewPage() {
 					<p className="mt-1 text-muted-foreground">{user?.username}</p>
 				</div>
 			</header>
+			<nav className="account-shortcuts" aria-label={t("nav.account")}>
+				<a href="#account-appearance">{t("workspace.appearance")}</a>
+				<a href="#account-security">{t("player.security")}</a>
+			</nav>
 			<div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-				<div className="account-panel" data-theme-surface="panel">
+				<div
+					id="account-appearance"
+					className="account-panel"
+					data-theme-surface="panel"
+				>
 					<PlayerSkinPage embedded />
 					<PlayerCapePage />
 				</div>
-				<div className="account-panel grid gap-6" data-theme-surface="panel">
+				<div
+					id="account-security"
+					className="account-panel grid gap-6"
+					data-theme-surface="panel"
+				>
 					<div>
 						<h2 className="text-xl font-semibold">{t("player.security")}</h2>
 						<p className="mt-2 text-sm text-muted-foreground">

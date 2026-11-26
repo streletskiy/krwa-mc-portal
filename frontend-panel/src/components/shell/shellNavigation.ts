@@ -1,5 +1,6 @@
 import type { IconName } from "@/components/ui/icon";
 import { hasOperatorScope } from "@/lib/operatorScopes";
+import { portalUrl } from "@/lib/portalLinks";
 import { accountPaths, adminPaths, publicPaths } from "@/routes/routePaths";
 import type { OperatorScope } from "@/types/api";
 
@@ -10,12 +11,13 @@ export type ShellNavItem = {
 	labelKey: string;
 	icon: IconName;
 	end?: boolean;
+	reloadDocument?: boolean;
 	operatorScope?: OperatorScope;
 	preload?: () => Promise<unknown>;
 };
 
 export type ShellNavSection = {
-	id: "account" | "admin";
+	id: "account" | "admin" | "operations" | "system";
 	labelKey: string;
 	items: ShellNavItem[];
 };
@@ -130,10 +132,12 @@ export const adminNavItems: ShellNavItem[] = [
 
 export function getShellNavSections({
 	isAdmin,
+	adminWorkspace = false,
 	operatorScopes,
 	textureLibraryEnabled = true,
 }: {
 	isAdmin: boolean;
+	adminWorkspace?: boolean;
 	operatorScopes: readonly OperatorScope[];
 	textureLibraryEnabled?: boolean;
 }): ShellNavSection[] {
@@ -148,14 +152,55 @@ export function getShellNavSections({
 		},
 	];
 
-	const visibleAdminItems = isAdmin
-		? adminNavItems
-		: adminNavItems.filter((item) => {
-				const scope = item.operatorScope;
-				return scope ? hasOperatorScope(operatorScopes, scope) : false;
-			});
+	const visibleAdminItems = adminNavItems.filter(
+		(item) =>
+			isAdmin ||
+			(item.operatorScope &&
+				hasOperatorScope(operatorScopes, item.operatorScope)),
+	);
+	const worldAdminUrl = isAdmin && portalUrl("world-admin-url");
+	if (worldAdminUrl) {
+		visibleAdminItems.splice(1, 0, {
+			to: worldAdminUrl,
+			labelKey: "admin.overview.quick.offlineWorlds",
+			icon: "ClipboardText",
+			reloadDocument: true,
+		});
+	}
 
 	if (visibleAdminItems.length > 0) {
+		if (adminWorkspace) {
+			const operations = new Set([
+				adminPaths.audit,
+				adminPaths.tasks,
+			] as string[]);
+			const system = new Set([
+				adminPaths.settings,
+				adminPaths.about,
+				adminPaths.externalAuth,
+				adminPaths.yggdrasilForwarding,
+			] as string[]);
+			const groups: ShellNavSection[] = [
+				{
+					id: "admin",
+					labelKey: "shell.sections.admin",
+					items: visibleAdminItems.filter(
+						(item) => !operations.has(item.to) && !system.has(item.to),
+					),
+				},
+				{
+					id: "operations",
+					labelKey: "workspace.operations",
+					items: visibleAdminItems.filter((item) => operations.has(item.to)),
+				},
+				{
+					id: "system",
+					labelKey: "workspace.system",
+					items: visibleAdminItems.filter((item) => system.has(item.to)),
+				},
+			];
+			return [...groups.filter((group) => group.items.length), ...sections];
+		}
 		sections.push({
 			id: "admin",
 			labelKey: "shell.sections.admin",

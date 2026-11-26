@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserDetailPanel } from "@/components/admin/admin-users-page/UserDetailPanel";
+import { WorldActivities } from "@/components/admin/WorldActivities";
 import { EmptyState } from "@/components/common/EmptyState";
 import { AdminPageHeader } from "@/components/layout/AdminPageHeader";
 import { AdminPageShell } from "@/components/layout/AdminPageShell";
@@ -11,6 +12,7 @@ import { handleApiError } from "@/hooks/useApiError";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { adminPaths } from "@/routes/routePaths";
 import { adminUserService } from "@/services/adminService";
+import { integratedWorlds } from "@/services/worldAdmin";
 import { useAuthStore } from "@/stores/authStore";
 import type { AdminUserInfo, UpdateAdminUserRequest } from "@/types/api";
 
@@ -24,6 +26,7 @@ function parseUserId(value: string | undefined) {
 export default function AdminUserDetailPage() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const fullAdmin = useAuthStore((s) => s.isAdmin);
 	const params = useParams();
 	const userId = parseUserId(params.id);
 	const syncCurrentUserFromAdminUser = useAuthStore(
@@ -112,12 +115,17 @@ export default function AdminUserDetailPage() {
 					{t("common.loading")}
 				</div>
 			) : user ? (
-				<UserDetailPanel
-					user={user}
-					onBack={backToUsers}
-					onRevokeSessions={revokeUserSessions}
-					onUpdate={updateUser}
-				/>
+				<>
+					{fullAdmin && integratedWorlds() && (
+						<WorldActivities userId={user.id} />
+					)}
+					<UserDetailPanel
+						user={user}
+						onBack={backToUsers}
+						onRevokeSessions={revokeUserSessions}
+						onUpdate={updateUser}
+					/>
+				</>
 			) : (
 				<div className="rounded-lg border border-border/70 bg-card dark:border-white/10 dark:bg-card/90">
 					<EmptyState

@@ -91,5 +91,39 @@
 		"description": "Self-hosted Minecraft identity, profile, and texture management.",
 		"navigation": "Navigation",
 		"copyright": "© {{year}} {{name}}. All rights reserved."
+	},
+	"workspace": {
+		"inbox": "Requires a decision",
+		"findPlayer": "Find a player",
+		"playerWorlds": "World access and trips",
+		"nickname": "Search by name",
+		"clear": "All requests have been reviewed.",
+		"noTrips": "No Minecraft profiles or trips yet.",
+		"worldError": "World service is unavailable.",
+		"searchError": "Player search is unavailable.",
+		"noPlayers": "No matching players.",
+		"trip": "Trip",
+		"access": "World access",
+		"world": "Whole world",
+		"parcel": "80 × 80 plot",
+		"settingsSearch": "Find a setting in all categories",
+		"appearance": "Appearance",
+		"debian": "Debian / Ubuntu package",
+		"operations": "Operations",
+		"system": "System",
+		"states": {
+			"review": "Review conflict",
+			"pending": "Review request",
+			"allowed": "Allowed",
+			"denied": "Denied",
+			"none": "No request",
+			"done": "Applied",
+			"ready": "Ready",
+			"submitted": "Submitted",
+			"approved": "Approved",
+			"closed": "Closed",
+			"failed": "Failed",
+			"preparing": "Preparing"
+		}
 	}
 }

@@ -129,14 +129,14 @@ function renderPage(
 }
 
 describe("AccountSettingsPage", () => {
-	it("keeps player settings limited to password, recovery email and sessions", () => {
+	it("gives players access to their profile, credentials, recovery email and sessions", () => {
 		renderPage({ ...baseUser, role: "user" });
-		expect(screen.queryByTestId("passkeys-section")).not.toBeInTheDocument();
-		expect(document.querySelector('input[type="file"]')).toBeNull();
+		expect(screen.getByTestId("passkeys-section")).toBeInTheDocument();
+		expect(document.querySelector('input[type="file"]')).not.toBeNull();
 		expect(
 			document.querySelector('input[autocomplete="current-password"]'),
 		).not.toBeNull();
-		expect(document.querySelectorAll("details")).toHaveLength(2);
+		expect(document.querySelector("#settings-security")).not.toBeNull();
 	});
 	beforeEach(() => {
 		vi.clearAllMocks();

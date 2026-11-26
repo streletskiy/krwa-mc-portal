@@ -214,7 +214,10 @@ test("player registration, skin and password stay separate from administration",
 		await (await page.request.get("/api/v1/profiles/minecraft")).json(),
 	).toEqual(before);
 	await page.goto("/account/wardrobe");
-	await expect(page).toHaveURL(/\/account\/profiles$/);
+	await expect(page).toHaveURL(/\/account\/wardrobe$/);
+	await expect(
+		page.getByRole("heading", { name: "Wardrobe", exact: true }),
+	).toBeVisible();
 	await expect(page.locator("canvas")).toBeVisible();
 	await page.waitForTimeout(500);
 	await page.screenshot({

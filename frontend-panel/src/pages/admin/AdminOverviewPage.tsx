@@ -2,6 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ActivityTrendChart } from "@/components/admin/admin-overview-page/OverviewTrendChartContent";
+import {
+	PlayerLookup,
+	WorldActivities,
+} from "@/components/admin/WorldActivities";
 import { DateTimeText } from "@/components/common/DateTimeText";
 import { StatusIndicator } from "@/components/common/StatusIndicator";
 import { AdminPageShell } from "@/components/layout/AdminPageShell";
@@ -21,6 +25,7 @@ import { cn } from "@/lib/utils";
 import { adminPaths } from "@/routes/routePaths";
 import { adminOverviewService } from "@/services/adminService";
 import { formatUnknownError } from "@/services/http";
+import { integratedWorlds } from "@/services/worldAdmin";
 import { useAuthStore } from "@/stores/authStore";
 import type {
 	AdminOverview,
@@ -92,11 +97,17 @@ export default function AdminOverviewPage() {
 	const username =
 		user?.profile?.display_name?.trim() || user?.username?.trim() || "admin";
 	const summary = overview?.summary;
+	const canSearch = useAuthStore(
+		(s) => s.isAdmin || s.operatorScopes.includes("users"),
+	);
 
 	return (
 		<AdminPageShell className="gap-5">
 			<div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_22rem]">
 				<div className="min-w-0 space-y-5">
+					<h1 className="workspace-title">{t("admin.overview.title")}</h1>
+					{user?.role === "admin" && integratedWorlds() && <WorldActivities />}
+					{canSearch && <PlayerLookup />}
 					<OverviewHero
 						error={error}
 						health={overview?.system_health}
@@ -350,13 +361,7 @@ function OverviewHero({
 
 	return (
 		<section className="relative overflow-hidden rounded-xl border border-border/70 bg-card text-card-foreground shadow-sm dark:border-white/10 dark:bg-card/78 dark:shadow-none">
-			<div
-				className="absolute inset-y-0 right-0 w-[82%] bg-cover bg-center opacity-55 sm:w-[68%] md:opacity-75 dark:opacity-24"
-				style={{ backgroundImage: "url('/static/images/home.webp')" }}
-			/>
-			<div className="absolute inset-0 bg-[linear-gradient(90deg,var(--card)_0%,var(--card)_43%,color-mix(in_oklch,var(--card)_88%,transparent)_64%,color-mix(in_oklch,var(--card)_30%,transparent)_100%)]" />
-			<div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-emerald-500/0 via-emerald-500/70 to-sky-500/0" />
-			<div className="relative grid min-h-36 gap-4 p-6 sm:p-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+			<div className="relative grid gap-3 p-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
 				<div className="min-w-0">
 					<div
 						className={cn(
@@ -367,9 +372,9 @@ function OverviewHero({
 						<StatusIndicator breathe tone="current" glow />
 						{t(heroStatus.labelKey)}
 					</div>
-					<h1 className="mt-4 max-w-2xl text-3xl font-semibold leading-tight tracking-normal sm:text-4xl">
+					<h2 className="mt-2 text-lg font-semibold">
 						{t("admin.overview.welcome", { username })}
-					</h1>
+					</h2>
 					<p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base">
 						{t("admin.overview.description")}
 					</p>
@@ -674,6 +679,8 @@ function ServiceStatusPanel({
 
 function QuickActionsPanel() {
 	const { t } = useTranslation();
+	const isAdmin = useAuthStore((state) => state.user?.role === "admin");
+	const worldAdminUrl = isAdmin ? portalUrl("world-admin-url") : "";
 
 	return (
 		<AdminSurface className="p-5">
@@ -682,18 +689,11 @@ function QuickActionsPanel() {
 			</h2>
 			<div className="mt-4 grid gap-3">
 				{quickActions
-					.filter(
-						(item) =>
-							item.to !== "world-admin-url" || portalUrl("world-admin-url"),
-					)
+					.filter((item) => item.to !== "world-admin-url" || worldAdminUrl)
 					.map((item) => (
 						<Link
 							key={item.to}
-							to={
-								item.to === "world-admin-url"
-									? portalUrl("world-admin-url")
-									: item.to
-							}
+							to={item.to === "world-admin-url" ? worldAdminUrl : item.to}
 							reloadDocument={item.to === "world-admin-url"}
 							className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-lg border border-border/60 bg-background/55 p-3 transition-[border-color,background-color] hover:border-primary/35 hover:bg-accent/45 dark:border-white/10 dark:bg-background/28 dark:hover:border-primary/35 dark:hover:bg-accent/20"
 						>

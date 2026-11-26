@@ -4,14 +4,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import * as z from "zod/v4";
 import { authEntryMainClassName } from "@/components/auth/AuthFormPrimitives";
-
 import {
 	type ExternalAuthRecoveryMode,
 	type ExternalAuthRecoveryState,
 	LoginFormCard,
 	type LoginFormCardProps,
 } from "@/components/auth/LoginFormCard";
-
 import { PublicEntryShell } from "@/components/layout/PublicEntryShell";
 import { useCaptchaChallenge } from "@/hooks/useCaptchaChallenge";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -27,6 +25,7 @@ import {
 	clearPasswordResetRedirectSearch,
 	getPasswordResetRedirectState,
 } from "@/lib/passwordResetRedirect";
+import { worldLoginReturn } from "@/lib/portalLinks";
 import {
 	confirmPasswordRequiredSchema,
 	emailSchema,
@@ -357,6 +356,17 @@ function useLoginPageController() {
 	);
 	const captchaConfig = useFrontendConfigStore((state) => state.captcha);
 	const navigate = useNavigate();
+	const worldReturn = worldLoginReturn();
+	function finishLogin() {
+		const current = useAuthStore.getState().user;
+		if (
+			worldReturn &&
+			current?.role === "admin" &&
+			!current.must_change_password
+		)
+			window.location.assign(worldReturn);
+		else navigate(accountPaths.home);
+	}
 	const isRegister = locationPathname === publicPaths.register;
 	const captchaRequired =
 		captchaConfig.enabled &&
@@ -619,7 +629,7 @@ function useLoginPageController() {
 					: undefined,
 			);
 			toast.success(t("login.loginSuccess"));
-			navigate(accountPaths.home);
+			finishLogin();
 		} catch (nextError) {
 			toast.error(formatUnknownError(nextError));
 			if (captchaRequired) void captcha.refresh();
@@ -635,7 +645,7 @@ function useLoginPageController() {
 				provider.kind,
 				provider.key,
 				{
-					return_path: accountPaths.home,
+					return_path: worldReturn || accountPaths.home,
 				},
 			);
 			window.location.assign(response.authorization_url);
@@ -732,7 +742,7 @@ function useLoginPageController() {
 			const credential = await getPasskeyCredential(start.public_key);
 			await loginWithPasskey(start.flow_id, credential);
 			toast.success(t("login.loginSuccess"));
-			navigate(accountPaths.home);
+			finishLogin();
 		} catch (nextError) {
 			if (nextError instanceof WebAuthnUnsupportedError) {
 				toast.error(t("login.passkeyUnsupported"));

@@ -365,6 +365,7 @@ const timeDisplayUnits: Record<TimeConfigBaseUnit, readonly TimeDisplayUnit[]> =
 export default function AdminSettingsPage() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
+	const [search, setSearch] = useState("");
 	const { category: routeCategory } = useParams<{ category?: string }>();
 	const [state, dispatch] = useReducer(
 		adminSettingsReducer,
@@ -451,9 +452,24 @@ export default function AdminSettingsPage() {
 
 	const filteredConfigs = useMemo(() => {
 		return configs.filter((config) => {
-			return rootCategory(config.category) === active;
+			const q = search.trim().toLocaleLowerCase();
+			if (!q) return rootCategory(config.category) === active;
+			const schema = schemaMap.get(config.key);
+			return [
+				config.key,
+				config.category,
+				translateOrFallback(t, schema?.label_i18n_key, humanizeKey(config.key)),
+				translateOrFallback(
+					t,
+					schema?.description_i18n_key,
+					config.description,
+				),
+			]
+				.join(" ")
+				.toLocaleLowerCase()
+				.includes(q);
 		});
-	}, [active, configs]);
+	}, [active, configs, search, schemaMap, t]);
 	const groupedConfigs = useMemo(
 		() =>
 			filteredConfigs.reduce<Record<string, SystemConfig[]>>(
@@ -569,6 +585,8 @@ export default function AdminSettingsPage() {
 
 	return (
 		<SettingsPageLayout
+			search={search}
+			onSearch={setSearch}
 			active={active}
 			activeTemplateVariableGroup={activeTemplateVariableGroup}
 			activeTemplateVariableGroupCode={activeTemplateVariableGroupCode}
@@ -600,6 +618,8 @@ export default function AdminSettingsPage() {
 }
 
 function SettingsPageLayout({
+	search,
+	onSearch,
 	active,
 	activeTemplateVariableGroup,
 	activeTemplateVariableGroupCode,
@@ -627,6 +647,8 @@ function SettingsPageLayout({
 	testEmailDialogOpen,
 	testEmailTarget,
 }: {
+	search: string;
+	onSearch: (value: string) => void;
 	active: string;
 	activeTemplateVariableGroup: TemplateVariableGroup | null;
 	activeTemplateVariableGroupCode: string | null;
@@ -672,12 +694,27 @@ function SettingsPageLayout({
 					/>
 				}
 			/>
-			<div className="grid gap-5 xl:grid-cols-[16.5rem_minmax(0,1fr)]">
-				<SettingsCategoryNav
-					active={active}
-					categories={categories}
-					configs={configs}
-				/>
+			<Input
+				type="search"
+				aria-label={t("workspace.settingsSearch")}
+				placeholder={t("workspace.settingsSearch")}
+				value={search}
+				onChange={(e) => onSearch(e.target.value)}
+			/>
+			<div
+				className={
+					search.trim()
+						? "grid gap-5"
+						: "grid gap-5 xl:grid-cols-[16.5rem_minmax(0,1fr)]"
+				}
+			>
+				{!search.trim() && (
+					<SettingsCategoryNav
+						active={active}
+						categories={categories}
+						configs={configs}
+					/>
+				)}
 				<SettingsCategoryContent
 					drafts={drafts}
 					empty={empty}

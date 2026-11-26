@@ -91,5 +91,39 @@
 		"description": "Твой аккаунт Minecraft, персонаж и скины.",
 		"navigation": "Навигация",
 		"copyright": "© {{year}} {{name}}. Все права защищены."
+	},
+	"workspace": {
+		"inbox": "Требуют решения",
+		"findPlayer": "Найти игрока",
+		"playerWorlds": "Доступ к мирам и поездки",
+		"nickname": "Поиск по имени",
+		"clear": "Все запросы разобраны.",
+		"noTrips": "Профилей Minecraft и поездок пока нет.",
+		"worldError": "Сервис миров недоступен.",
+		"searchError": "Поиск игроков временно недоступен.",
+		"noPlayers": "Игроки не найдены.",
+		"trip": "Поездка",
+		"access": "Доступ к миру",
+		"world": "Весь мир",
+		"parcel": "Участок 80 × 80",
+		"settingsSearch": "Найти настройку во всех разделах",
+		"appearance": "Внешний вид",
+		"debian": "Пакет для Debian / Ubuntu",
+		"operations": "Операции",
+		"system": "Система",
+		"states": {
+			"review": "Разобрать конфликт",
+			"pending": "Разобрать запрос",
+			"allowed": "Разрешён",
+			"denied": "Закрыт",
+			"none": "Заявок пока нет",
+			"done": "Применено",
+			"ready": "Готова",
+			"submitted": "Отправлена",
+			"approved": "Одобрена",
+			"closed": "Закрыта",
+			"failed": "Ошибка",
+			"preparing": "Подготовка"
+		}
 	}
 }

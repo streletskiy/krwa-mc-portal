@@ -139,3 +139,35 @@ test("keeps app topbar compact across account and admin shells", async ({
 	).toHaveCount(0);
 	await expect(page.getByText("⌘K")).toHaveCount(0);
 });
+
+test("administrators can reach the configured world manager from their account and both navigation menus", async ({
+	page,
+}) => {
+	await loginAsAdmin(page);
+	await page.getByRole("button", { name: adminUsername }).click();
+	await page.getByRole("menuitem", { name: "Admin", exact: true }).click();
+	await expect(page).toHaveURL(/\/admin$/);
+
+	const worldPath = "/admin/offline-worlds";
+	await page.route(
+		(url) => url.pathname === worldPath,
+		(route) =>
+			route.fulfill({
+				contentType: "text/html",
+				body: "<h1>World manager</h1>",
+			}),
+	);
+	for (const width of [1440, 390]) {
+		await page.setViewportSize({ width, height: 900 });
+		await page.goto("/admin/settings/site");
+		if (width === 390)
+			await page.getByRole("button", { name: "Open navigation" }).click();
+		await page
+			.getByRole("navigation")
+			.getByRole("link", { name: "Offline worlds" })
+			.click();
+		await expect(
+			page.getByRole("heading", { name: "World manager" }),
+		).toBeVisible();
+	}
+});

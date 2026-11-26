@@ -13,10 +13,14 @@ export function TextureLibrarySectionNav({
 }) {
 	const { t } = useTranslation();
 	return (
-		<>
+		<nav
+			className="workspace-subnav"
+			aria-label={t("admin.nav.textureLibrary")}
+		>
 			<Button
 				type="button"
-				variant={active === "textures" ? "default" : "outline"}
+				variant="ghost"
+				aria-current={active === "textures" ? "page" : undefined}
 				size="sm"
 				render={<Link to={adminPaths.textureLibrary} />}
 			>
@@ -25,7 +29,8 @@ export function TextureLibrarySectionNav({
 			</Button>
 			<Button
 				type="button"
-				variant={active === "reviews" ? "default" : "outline"}
+				variant="ghost"
+				aria-current={active === "reviews" ? "page" : undefined}
 				size="sm"
 				render={<Link to={adminPaths.textureLibraryReviews} />}
 			>
@@ -34,7 +39,8 @@ export function TextureLibrarySectionNav({
 			</Button>
 			<Button
 				type="button"
-				variant={active === "reports" ? "default" : "outline"}
+				variant="ghost"
+				aria-current={active === "reports" ? "page" : undefined}
 				size="sm"
 				render={<Link to={adminPaths.textureLibraryReports} />}
 			>
@@ -43,13 +49,14 @@ export function TextureLibrarySectionNav({
 			</Button>
 			<Button
 				type="button"
-				variant={active === "tags" ? "default" : "outline"}
+				variant="ghost"
+				aria-current={active === "tags" ? "page" : undefined}
 				size="sm"
 				render={<Link to={adminPaths.textureLibraryTags} />}
 			>
 				<Icon name="ListBullets" className="size-4" />
 				{t("admin.textureLibraryTexturesPage.tags")}
 			</Button>
-		</>
+		</nav>
 	);
 }

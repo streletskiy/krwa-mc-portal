@@ -1,12 +1,12 @@
 import { type ReactNode, Suspense, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthUserMenu } from "@/components/common/AuthUserMenu";
 import { LanguageMenu } from "@/components/common/LanguageMenu";
 import { BrandMark } from "@/components/layout/BrandMark";
 import { ThemeToggleButton } from "@/components/layout/ThemeToggleButton";
 import { readStorageItem, STORAGE_KEYS } from "@/lib/storage";
-import { publicPaths } from "@/routes/routePaths";
+import { accountPaths, publicPaths } from "@/routes/routePaths";
 import { useAuthStore } from "@/stores/authStore";
 import { useFrontendConfigStore } from "@/stores/frontendConfigStore";
 import { useThemeStore } from "@/stores/themeStore";
@@ -34,8 +34,9 @@ export function PlayerFrame({
 			<header className="player-header" data-theme-surface="chrome">
 				<Link to="/" className="player-brand" aria-label={branding.title}>
 					<BrandMark branding={branding} className="portal-icon" />
-					{!(branding.wordmarkDarkUrl || branding.wordmarkLightUrl) &&
-						branding.title}
+					{!(branding.wordmarkDarkUrl || branding.wordmarkLightUrl) && (
+						<span className="truncate">{branding.title}</span>
+					)}
 				</Link>
 				<div className="flex items-center gap-2">
 					<ThemeToggleButton />
@@ -57,7 +58,31 @@ export function PlayerFrame({
 				</div>
 			</header>
 
-			<div className="player-content">{children}</div>
+			{account && (
+				<nav
+					aria-label={t("nav.account")}
+					className="player-nav account-navigation"
+				>
+					{[
+						[accountPaths.home, "nav.account"],
+						[accountPaths.profiles, "nav.profiles"],
+						[accountPaths.wardrobe, "nav.wardrobe"],
+						[accountPaths.audit, "nav.accountAudit"],
+						[accountPaths.settings, "nav.personalSettings"],
+					].map(([to, label]) => (
+						<NavLink key={to} to={to} end>
+							{t(label)}
+						</NavLink>
+					))}
+				</nav>
+			)}
+			<div
+				className={
+					account ? "player-content account-content" : "player-content"
+				}
+			>
+				{children}
+			</div>
 			<footer className="player-footer">
 				<span>
 					{branding.title} · {t("player.footer")}

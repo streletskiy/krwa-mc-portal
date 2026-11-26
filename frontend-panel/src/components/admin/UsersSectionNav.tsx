@@ -9,10 +9,11 @@ export type UsersSection = "users" | "invitations";
 export function UsersSectionNav({ active }: { active: UsersSection }) {
 	const { t } = useTranslation();
 	return (
-		<>
+		<nav className="workspace-subnav" aria-label={t("admin.nav.users")}>
 			<Button
 				type="button"
-				variant={active === "users" ? "default" : "outline"}
+				variant="ghost"
+				aria-current={active === "users" ? "page" : undefined}
 				size="sm"
 				render={<Link to={adminPaths.users} />}
 			>
@@ -21,13 +22,14 @@ export function UsersSectionNav({ active }: { active: UsersSection }) {
 			</Button>
 			<Button
 				type="button"
-				variant={active === "invitations" ? "default" : "outline"}
+				variant="ghost"
+				aria-current={active === "invitations" ? "page" : undefined}
 				size="sm"
 				render={<Link to={adminPaths.userInvitations} />}
 			>
 				<Icon name="EnvelopeSimple" className="size-4" />
 				{t("admin.users.invitationRecords")}
 			</Button>
-		</>
+		</nav>
 	);
 }

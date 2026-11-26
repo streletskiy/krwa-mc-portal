@@ -1,0 +1,273 @@
+.admin-shell,
+html:has(.admin-shell) {
+	color-scheme: dark;
+	--background: #151619;
+	--foreground: #eeeef2;
+	--card: #202126;
+	--card-foreground: #eeeef2;
+	--popover: #24252c;
+	--popover-foreground: #eeeef2;
+	--primary: #ced1e9;
+	--primary-foreground: #18191f;
+	--secondary: #303139;
+	--secondary-foreground: #ececf1;
+	--muted: #292a31;
+	--muted-foreground: #b4b5c1;
+	--accent: #33343e;
+	--accent-foreground: #f2f2f5;
+	--border: #3e404a;
+	--input: #4a4b56;
+	--ring: #bfc2ed;
+	--color-emerald-50: #f1f1f5;
+	--color-emerald-100: #e3e3ed;
+	--color-emerald-200: #d6d6e5;
+	--color-emerald-300: #c5c6dc;
+	--color-emerald-400: #abacc6;
+	--color-emerald-500: #9092ad;
+	--color-emerald-600: #707184;
+	--color-emerald-700: #555662;
+	--color-emerald-800: #40414a;
+	--color-emerald-900: #292a31;
+	--color-emerald-950: #191a20;
+}
+.admin-shell.app-shell {
+	background: var(--background);
+	color: var(--foreground);
+}
+.admin-shell.app-shell::before {
+	display: none;
+}
+.admin-shell
+	:is([data-slot="shell-desktop-sidebar"], [data-slot="shell-mobile-drawer"]) {
+	background: #1c1d22;
+	border-right: 1px solid var(--border);
+	box-shadow: none;
+}
+.admin-shell [data-slot^="shell-"] nav a[aria-current="page"] {
+	background: #373842;
+	color: #fff;
+}
+.admin-shell main {
+	min-width: 0;
+}
+.admin-shell .workspace-title {
+	font-size: clamp(1.7rem, 3vw, 2.4rem);
+	line-height: 1.15;
+	font-weight: 650;
+	letter-spacing: -0.035em;
+}
+.workspace-list {
+	padding: clamp(1rem, 2vw, 1.4rem);
+	display: grid;
+	gap: 0.8rem;
+}
+.workspace-list h2 {
+	font-size: 1.15rem;
+	font-weight: 650;
+}
+.workspace-list p,
+.workspace-list small {
+	color: var(--muted-foreground);
+	font-size: 0.875rem;
+}
+.workspace-list li + li {
+	border-top: 1px solid var(--border);
+}
+.workspace-list li a {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	min-height: 44px;
+	padding: 8px 4px;
+	overflow-wrap: anywhere;
+}
+.workspace-list li a:hover {
+	color: var(--primary);
+	background: var(--accent);
+}
+.workspace-list small {
+	display: block;
+}
+.workspace-list li a > span:last-child {
+	font-size: 0.875rem;
+}
+:is(.admin-shell, .account-content)
+	:is(
+		[data-slot="input"]:not([type="checkbox"], [type="radio"]),
+		[data-slot="select-trigger"],
+		[data-slot="button"]
+	):not([data-size="icon-xs"], [data-size="icon-sm"]) {
+	min-height: 44px;
+	box-sizing: border-box;
+}
+:is(.admin-shell, .account-content)
+	:is([data-slot="table-container"], fieldset, section) {
+	min-width: 0;
+}
+:is(.admin-shell, .account-content) [data-slot="table-head"] {
+	color: var(--muted-foreground);
+	font-weight: 600;
+}
+.admin-shell [data-slot="table-container"],
+.admin-shell [data-theme-surface="panel"] {
+	border-color: var(--border);
+}
+.admin-shell [data-slot="input"],
+.admin-shell [data-slot="select-trigger"] {
+	background: var(--background);
+	color: var(--foreground);
+	border-color: var(--input);
+}
+.player-shell .account-navigation {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 16px;
+}
+.player-shell .account-navigation a,
+.account-shortcuts a,
+.player-other-downloads summary {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+}
+.account-shortcuts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: -8px 0 20px;
+}
+.account-shortcuts a {
+	padding: 0 14px;
+	border: 1px solid var(--border);
+	background: var(--card);
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+}
+.account-navigation a[aria-current="page"] {
+	border-color: var(--primary);
+	color: var(--foreground);
+}
+.account-content .account-panel {
+	scroll-margin-block-start: 18px;
+}
+.player-other-downloads summary {
+	cursor: pointer;
+	color: var(--primary);
+	font-size: 14px;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.player-other-downloads a {
+	max-width: 320px;
+}
+.player-start-downloads > div {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 700px) {
+	.player-shell .account-navigation {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0 10px;
+	}
+	.player-shell .account-navigation a {
+		padding-block: 6px;
+		line-height: 1.25;
+	}
+	.account-content > section {
+		min-width: 0;
+	}
+	.workspace-list li a {
+		align-items: flex-start;
+	}
+}
+
+.account-wardrobe .account-panel > section:first-child {
+	margin-block-start: 0;
+	border-top: 0;
+	padding-block-start: 0;
+}
+
+.workspace-subnav {
+	display: flex;
+	flex: 1 0 100%;
+	gap: 4px;
+	flex-wrap: wrap;
+	padding-bottom: 8px;
+	border-bottom: 1px solid var(--border);
+}
+.workspace-subnav [aria-current="page"] {
+	background: var(--accent);
+	color: var(--foreground);
+}
+@media (max-width: 700px) {
+	.responsive-records {
+		display: block;
+		min-width: 0;
+		width: 100%;
+	}
+	.responsive-records thead:not(:has(button)) {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+	}
+	.responsive-records thead:has(button),
+	.responsive-records tbody {
+		display: block;
+	}
+	.responsive-records thead:has(button) tr {
+		display: flex;
+		flex-wrap: wrap;
+		height: auto;
+		padding: 6px;
+	}
+	.responsive-records thead:has(button) th {
+		position: static;
+		height: auto;
+		width: auto;
+		min-width: 0;
+	}
+	.responsive-records thead:has(button) th:not(:has(button)) {
+		display: none;
+	}
+	.responsive-records tbody tr {
+		display: grid;
+		height: auto;
+		gap: 6px;
+		padding: 12px;
+		border-bottom: 1px solid var(--border);
+	}
+	.responsive-records tbody tr:last-child {
+		border-bottom: 0;
+	}
+	.responsive-records tbody td {
+		display: grid;
+		grid-template-columns: minmax(5rem, 32%) minmax(0, 1fr);
+		align-items: center;
+		gap: 8px;
+		min-width: 0;
+		padding: 2px 0;
+		text-align: start;
+		white-space: normal;
+		overflow-wrap: anywhere;
+	}
+	.responsive-records td[data-column-label]::before {
+		content: attr(data-column-label);
+		font-size: 0.75rem;
+		color: var(--muted-foreground);
+	}
+	.responsive-records td:not([data-column-label]) {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.responsive-records td > * {
+		min-width: 0;
+		max-width: 100%;
+		justify-self: start;
+	}
+	.responsive-records td [data-slot="button"] {
+		min-width: 44px;
+	}
+}

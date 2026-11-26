@@ -721,21 +721,21 @@ describe("frontend entry routes", () => {
 		expect(sidebarNav).toBeTruthy();
 		const sidebarLinks = within(sidebarNav as HTMLElement).getAllByRole("link");
 		expect(sidebarLinks.map((link) => link.getAttribute("href"))).toEqual([
+			"/admin",
+			"/admin/users",
+			"/admin/texture-library",
+			"/admin/audit",
+			"/admin/tasks",
+			"/admin/external-auth",
+			"/admin/yggdrasil-forwarding",
+			"/admin/settings",
+			"/admin/about",
 			"/account",
 			"/account/profiles",
 			"/account/wardrobe",
 			"/textures",
 			"/account/audit",
 			"/account/settings",
-			"/admin",
-			"/admin/users",
-			"/admin/external-auth",
-			"/admin/yggdrasil-forwarding",
-			"/admin/texture-library",
-			"/admin/audit",
-			"/admin/tasks",
-			"/admin/settings",
-			"/admin/about",
 		]);
 		for (const link of sidebarLinks) {
 			expect(link.className).not.toContain("translate-y");
@@ -1455,12 +1455,12 @@ describe("frontend entry routes", () => {
 		expect(
 			screen.getByRole("heading", {
 				level: 1,
-				name: "Account & password",
+				name: "Personal settings",
 			}),
 		).toBeInTheDocument();
 		expect(screen.getAllByText("alex").length).toBeGreaterThan(0);
 		expect(screen.getAllByText("alex@example.com").length).toBeGreaterThan(0);
-		expect(screen.getByText("Devices and sign-out")).toBeInTheDocument();
+		expect(screen.getByText("Login devices")).toBeInTheDocument();
 	});
 
 	it("shows only active login devices in the settings section", async () => {
