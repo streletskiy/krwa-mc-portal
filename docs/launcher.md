@@ -6,7 +6,7 @@
 4. Войдите с аккаунтом портала и выберите персонажа. Для сервера с authlib-injector используйте тот же API и включённую проверку сессий.
 
 ```sh
-curl -fsSI https://portal.example.org/
+curl -fsS -D - -o /dev/null https://portal.example.org/
 curl -fsS https://portal.example.org/api/yggdrasil
 ```
 

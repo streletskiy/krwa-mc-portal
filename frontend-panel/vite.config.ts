@@ -105,48 +105,33 @@ export default defineConfig(({ command }) => {
 			tailwindcss(),
 			VitePWA({
 				registerType: "autoUpdate",
-				includeAssets: ["favicon.svg"],
+				includeAssets: [],
 				devOptions: {
 					enabled: true,
 					navigateFallbackAllowlist: [/^\/$/],
 				},
-				manifest: {
-					name: "Minecraft Portal",
-					short_name: "Minecraft Portal",
-					description: "Minecraft player accounts, skins and launcher sign-in.",
-					theme_color: "#0F172A",
-					background_color: "#ffffff",
-					display: "standalone",
-					icons: [
-						{
-							src: "/favicon.svg",
-							sizes: "any",
-							type: "image/svg+xml",
-							purpose: "any",
-						},
-						{
-							src: "/favicon.svg",
-							sizes: "any",
-							type: "image/svg+xml",
-							purpose: "maskable",
-						},
-					],
-				},
+				manifest: false,
 				workbox: {
 					globPatterns: isDevServer
 						? []
 						: ["index.html", "assets/**/*.{js,css,mjs,woff2}"],
 					globIgnores: isDevServer ? [] : STARTUP_FORBIDDEN_PRECACHE_GLOBS,
-					navigateFallback: "index.html",
-					navigateFallbackDenylist: [
-						/^\/admin\/offline-worlds(?:\/|$)/,
-						/^\/api\//,
-						/^\/health\//,
-						/^\/downloads?(?:\/|$)/,
-						/^\/(?:servers|repo|modpacks|pack|textures)\//,
-						/^\/(?:distribution|community)\.json$/,
-					],
+					directoryIndex: null,
+					navigateFallback: null,
 					runtimeCaching: [
+						{
+							// The HTML contains deployment settings. Read them on each online
+							// navigation, keeping the installed shell available offline.
+							urlPattern: ({ request, url, sameOrigin }) =>
+								sameOrigin &&
+								request.mode === "navigate" &&
+								(url.pathname === "/" ||
+									/^\/(?:login|register|account|init|privacy|tos|reset-password|force-password-change)(?:\/|$)/.test(
+										url.pathname,
+									)),
+							handler: "NetworkOnly",
+							options: { precacheFallback: { fallbackURL: "/index.html" } },
+						},
 						{
 							urlPattern: ({ request, url }) =>
 								url.pathname.startsWith("/assets/") &&
@@ -186,6 +171,7 @@ export default defineConfig(({ command }) => {
 		},
 		server: {
 			proxy: {
+				"/manifest.webmanifest": { target: "http://127.0.0.1:3300" },
 				"/community.json": { target: "http://127.0.0.1:8089" },
 				"/download": { target: "http://127.0.0.1:8089" },
 				"/api": {

@@ -38,7 +38,7 @@ async function loginAsAdmin(page: Page) {
 	await expect(page).toHaveURL(/\/account$/);
 }
 
-test("serves the Example player entry screen", async ({ page }) => {
+test("serves the player entry screen", async ({ page }) => {
 	await ensureInitialized(page);
 
 	await page.goto("/");
@@ -113,8 +113,11 @@ test("keeps app topbar compact across account and admin shells", async ({
 
 	await page.setViewportSize({ width: 390, height: 844 });
 	await expect(page).toHaveURL(/\/account$/);
+	const config = await page.request.get("/api/v1/public/frontend-config");
+	expect(config.ok()).toBe(true);
+	const { data } = await config.json();
 	await expect(
-		page.getByRole("banner").getByRole("link", { name: "Minecraft Portal" }),
+		page.getByRole("banner").getByRole("link", { name: data.branding.title }),
 	).toBeVisible();
 	await expect(
 		page.getByPlaceholder("Search players, UUIDs, sessions, or settings..."),
