@@ -148,7 +148,7 @@ test("administrators can reach the configured world manager from their account a
 	await page.getByRole("menuitem", { name: "Admin", exact: true }).click();
 	await expect(page).toHaveURL(/\/admin$/);
 
-	const worldPath = "/admin/offline-worlds";
+	const worldPath = "/api/offline-worlds/workspace";
 	await page.route(
 		(url) => url.pathname === worldPath,
 		(route) =>
@@ -167,7 +167,57 @@ test("administrators can reach the configured world manager from their account a
 			.getByRole("link", { name: "Offline worlds" })
 			.click();
 		await expect(
-			page.getByRole("heading", { name: "World manager" }),
+			page
+				.frameLocator("iframe")
+				.getByRole("heading", { name: "World manager" }),
 		).toBeVisible();
 	}
+});
+
+test("phone sign-in resumes the scanned device and issues one game session", async ({
+	page,
+	request,
+}) => {
+	await ensureInitialized(page);
+	const username = "Phone" + Date.now().toString(36);
+	const password = "E2e-Device-Passw0rd!";
+	const created = await request.post("/api/v1/auth/register", {
+		data: { username, email: username + "@example.test", password },
+	});
+	expect(created.ok()).toBe(true);
+	const device = "/api/v1/launcher-device/";
+	const start = await request.post(device + "start", {
+		data: { client_token: "paired-deck" },
+	});
+	expect(start.ok()).toBe(true);
+	const { code, secret } = await start.json();
+	await page.setViewportSize({ width: 390, height: 844 });
+	await page.goto("/device?code=" + code);
+	await expect(page).toHaveURL(/\/login\?/);
+	await page.getByLabel("Email or username").fill(username);
+	await page
+		.getByRole("textbox", { exact: true, name: "Password" })
+		.fill(password);
+	await page.getByRole("button", { name: "Login" }).click();
+	await expect(page).toHaveURL(new RegExp("/device\\?code=" + code + "$"));
+	await expect(
+		page.getByText(code.slice(-6).toUpperCase(), { exact: true }),
+	).toBeVisible();
+	await page.getByRole("button", { name: "Approve sign-in" }).click();
+	await expect(
+		page.getByRole("status").filter({ hasText: "Approved." }),
+	).toBeVisible();
+	const poll = () => request.post(device + "poll", { data: { code, secret } });
+	const result = await poll();
+	expect(result.status()).toBe(200);
+	const session = await result.json();
+	expect(session.selectedProfile.name).toBe(username);
+	expect(
+		(
+			await request.post("/api/yggdrasil/authserver/validate", {
+				data: { accessToken: session.accessToken, clientToken: "paired-deck" },
+			})
+		).status(),
+	).toBe(204);
+	expect((await poll()).status()).toBe(410);
 });
